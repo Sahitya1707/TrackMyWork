@@ -20,5 +20,8 @@ namespace TrackMyWork.Models
         [Required]
         [Display(Name = "Email Address")]
         public string Email { get; set; }
+
+        public ICollection<Project> Projects { get; set; }  // there can be multiple projects from one client
+        public ICollection<Invoice> Invoices { get; set; } // there can be multiple invoices for one clients
     }
 }

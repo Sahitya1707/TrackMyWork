@@ -12,7 +12,7 @@ namespace TrackMyWork.Models
         public DateTime EntryDate { get; set; }  // this is to set the date of the time entry
 
         [Required]
-        [Display(Name = "Hour Worked")]
+        [Display(Name = "Hours Worked")]
         public double Hours { get; set; } // to set the data worked
 
         // Foreign Key
@@ -20,5 +20,12 @@ namespace TrackMyWork.Models
         public int ProjectId { get; set; }
 
         public Project? Project { get; set; }
+
+
+        // Adding user as a foreign key
+        [Display(Name = "User")]  
+        public int UserId {  get; set; }
+
+        public User? User { get; set; }
     }
 }
