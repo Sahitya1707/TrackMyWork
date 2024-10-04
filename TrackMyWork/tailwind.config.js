@@ -7,10 +7,11 @@ module.exports = {
     theme: {
         extend: {},
         colors: {
-            primary: "rgb(var(--color-primary) / <alpha-value>)",
+            primary: "rgb(var(--color-primary) / <alpha-value> )",
             secondary: "rgb(var(--color-secondary) / <alpha-value> )",
             thirdColor: "rgb(var(--color-third) / <alpha-value> )",
-            textColor: "rgb(var(--text-color) / <alpha-value> )",
+            ColorWhite: "rgb(var(--text-color-white) / <alpha-value> )",
+            ColorBlack: "rgb(var(--text-color-black) / <alpha-value>)"
           
         },
     },

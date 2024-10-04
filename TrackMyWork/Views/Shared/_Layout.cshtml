@@ -9,31 +9,40 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-primary w-100" style="height:4rem;">
-            <div class="container-fluid d-flex justify-content-between w-100 text-primary">
-                <a class="navbar-brand">
-                    <img src="https://png.pngtree.com/png-clipart/20190604/original/pngtree-business-logo-design-png-image_915991.jpg" alt="" class="" style="height:2rem; width:1rem;" />
-                </a>
-                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse justify-content-end" id="collapseNavbar">
-                    <ul class="navbar-nav text-uppercase">
-                        <li class="nav-item ">
-                            <a class="nav-link active text-white" aria-current="page" asp-action="index" aria-current="page" asp-controller="home">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-action="index" asp-controller="user">User</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link  " href="#">Client</a>
-                        </li>
-                        <li class="nav-item text-[red]">
-                            <a class="nav-link text-[red]" href="#">Project</a>
-                        </li>
-                      
-                    </ul>
+        <nav class="bg-secondary p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <!-- Logo/Image -->
+                <div class="flex items-center">
+                    <img src="https://png.pngtree.com/png-vector/20211023/ourmid/pngtree-salon-logo-png-image_4004444.png" alt="Logo" class="h-10 w-10 mr-3 ">
+                    
                 </div>
+
+                <ul class="flex items-center gap-x-4 uppercase text-ColorWhite font-semibold">
+                    
+                        <li>
+                        <a href="/" class="">
+                            Home
+                        </a>
+                        
+                        </li>
+                  <li>
+                        <a href="/Clients" class="text-gray-300 hover:text-white"> Clients </a>
+                  </li>
+
+                    <li>
+                        <a href="/Projects" class="text-gray-300 hover:text-white">Projects</a>
+
+                   </li>
+                   <li>
+                        <a href="/TimeTracking" class="text-gray-300 hover:text-white">Time Tracking</a>
+                   </li>
+                   <li>
+                        <a href="/Invoices" class="text-gray-300 hover:text-white">Invoices</a>
+
+</li>
+                   
+                
+                </ul>
             </div>
         </nav>
     </header>
@@ -43,8 +52,8 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
+    <footer class="bg-primary ">
+        <div class="text-center ">
             &copy; 2024 - TrackMyWork - Sahitya Neupane - 200568451 - Georgian College Project - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-decoration-none text-decoration-underline-hover">Privacy</a>
         </div>
     </footer>

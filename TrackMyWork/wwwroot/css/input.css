@@ -9,11 +9,10 @@
 @layer base {
     :root {
         --color-primary: 255 215 196;
-        --color-secondary: 135 162 255;
+        --color-secondary: 255 215 196;
         --color-third: 255 244 181;
-        --text-color: 0 0 0;
-        
-       
+        --text-color-white: 255 255 255;
+        --text-color-black: 0 0 0;
         /* ... */
     }
 }
