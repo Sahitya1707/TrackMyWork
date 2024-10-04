@@ -4,12 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - TrackMyWork</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/output.css">
+ 
 
 </head>
 <body>
     <header>
-        <nav class="bg-secondary p-4">
+        <nav class="bg-primary p-4 w-[100vw]">
             <div class="container mx-auto flex justify-between items-center">
                 <!-- Logo/Image -->
                 <div class="flex items-center">
@@ -17,16 +21,16 @@
                     
                 </div>
 
-                <ul class="flex items-center gap-x-4 uppercase text-ColorWhite font-semibold">
+                <ul class="flex items-center gap-x-4 font-semibold uppercase text-ColorBlack font-semibold hover:underline">
                     
                         <li>
-                        <a href="/" class="">
+                        <a  asp-controller="home" asp-action="index" class="">
                             Home
                         </a>
                         
                         </li>
                   <li>
-                        <a href="/Clients" class="text-gray-300 hover:text-white"> Clients </a>
+                        <a   asp-action="index" asp-controller="client"> Clients </a>
                   </li>
 
                     <li>
@@ -46,13 +50,13 @@
             </div>
         </nav>
     </header>
-    <div class="container p-2">
+    <div class="">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="bg-primary ">
+    <footer class="bg-primary p-[2rem]">
         <div class="text-center ">
             &copy; 2024 - TrackMyWork - Sahitya Neupane - 200568451 - Georgian College Project - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-decoration-none text-decoration-underline-hover">Privacy</a>
         </div>
