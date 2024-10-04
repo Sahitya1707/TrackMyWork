@@ -4,51 +4,40 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - TrackMyWork</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/TrackMyWork.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/output.css">
+
 </head>
 <body>
     <header>
-      
-        <!-- await Html.PartialAsync("_Header") cannot use this (https://learn.microsoft.com/en-us/aspnet/core/mvc/views/partial?view=aspnetcore-8.0), I tried making the _header as a seperate component -->
-
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="/">
-                <img src="~/images/logo.png" alt="Logo" /> <!-- Update with your logo path -->
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/User/Login">Users</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Client">Clients</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Project">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/TimeTracking">Time Tracking</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Invoice">Invoices</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Communication">Communication</a>
-                    </li>
-                </ul>
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary w-100" style="height:4rem;">
+            <div class="container-fluid d-flex justify-content-between w-100">
+                <a class="navbar-brand">
+                    <img src="https://png.pngtree.com/png-clipart/20190604/original/pngtree-business-logo-design-png-image_915991.jpg" alt="" class="" style="height:2rem; width:1rem;" />
+                </a>
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse justify-content-end" id="collapseNavbar">
+                    <ul class="navbar-nav text-uppercase">
+                        <li class="nav-item ">
+                            <a class="nav-link active text-white" aria-current="page" asp-action="index" aria-current="page" asp-controller="home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="index" asp-controller="user">User</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  " href="#">Client</a>
+                        </li>
+                        <li class="nav-item text-[red]">
+                            <a class="nav-link text-[red]" href="#">Project</a>
+                        </li>
+                      
+                    </ul>
+                </div>
             </div>
         </nav>
-        
     </header>
-    <div class="container">
+    <div class="container p-2">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -56,9 +45,11 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - TrackMyWork - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - TrackMyWork - Sahitya Neupane - 200568451 - Georgian College Project - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-decoration-none text-decoration-underline-hover">Privacy</a>
         </div>
     </footer>
+
+    <!-- Load jQuery first, then Bootstrap JS -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

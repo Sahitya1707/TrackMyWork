@@ -1,8 +1,48 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="jumbotron text-center">
+    <h1>Welcome to Freelance Manager</h1>
+    <p>Your solution for managing clients, projects, time, and invoices.</p>
+</div>
+
+<div class="container mt-5 text-red-500">
+    <div class="row">
+        <!-- Feature: Client Management -->
+        <div class="col-md-4 text-center text-[blue]">
+            <h3>Client Management</h3>
+            <p>Manage your clients' details and project history.</p>
+            <a href="/Clients" class="btn btn-secondary">Manage Clients</a>
+        </div>
+        <!-- Feature: Project Tracking -->
+        <div class="col-md-4 text-center">
+            <h3 class="text-[red]">Project Tracking</h3>
+            <p>Track your projects with timelines and tasks.</p>
+            <a href="/Projects" class="btn btn-secondary">View Projects</a>
+        </div>
+        <!-- Feature: Time Tracking -->
+        <div class="col-md-4 text-center">
+            <h3 class="text-[blue] border-2 border-[blue]">Time Tracking</h3>
+            <p>Track time spent on different tasks.</p>
+            <a href="/TimeTracking" class="btn btn-secondary">Track Time</a>
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <div class="row">
+        <!-- Feature: Invoice Management -->
+        <div class="col-md-6 text-center">
+            <h3>Invoicing</h3>
+            <p>Generate and send invoices easily.</p>
+            <a href="/Invoices" class="btn btn-secondary">Manage Invoices</a>
+        </div>
+        <!-- Feature: Reporting -->
+        <div class="col-md-6 text-center">
+            <h3>Reporting</h3>
+            <p>View detailed reports on your work and finances.</p>
+            <a href="/Reports" class="btn btn-secondary">View Reports</a>
+        </div>
+    </div>
 </div>
