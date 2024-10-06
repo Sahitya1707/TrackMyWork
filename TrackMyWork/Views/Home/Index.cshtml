@@ -4,16 +4,97 @@
 
 
 
-<section class=" h-screen w-[100vw] flex items-center justify-center relative">
+ <section class=" h-[80vh] w-[100vw] flex items-center justify-center relative">
+     <!-- 
+
+     What is URL.content???
+     https://stackoverflow.com/questions/25625162/is-there-a-benefit-to-using-url-content
+     -->
     <div class="top-0 bottom-0 h-[100%] w-[100%] bg-cover bg-center absolute" style="background-image: url('@Url.Content("~/images/freelance.jpg")');"></div>
 
-    <div class="relative z-10 text-center text-white">
-        <h1 class="text-5xl font-bold mb-4">Get Lost While Tracking the Work?</h1>
-        <p class="text-xl mb-8">Let us manage clients, handle invoicing all for you in one place.</p>
-        <a  class="bg-[] text-white py-3 px-6 rounded-lg shadow-lg hover:bg-opacity-90 transition duration-300" asp-action="index" asp-controller="client">
+    <div class="relative z-10 text-left text-ColorWhite w-[80%] ">
+        <h1 class="text-4xl font-bold mb-4 tracking-widest uppercase"
+        style="
+text-shadow:8px 5px 10px black;
+"
+        >Got Lost While Tracking the Work?</h1>
+        <p class="text-xl mb-8"
+        style="
+text-shadow:8px 5px 10px black;
+"
+        >Let us manage clients, handle invoicing all for you in one place.</p>
+        <a class="bg-Secondary text-ColorWhite py-3 px-6 rounded-[5px] shadow-lg  transition duration-300 border-2 border-ColorWhite hover:bg-ColorWhite hover:text-Secondary hover:border-Secondary shadow-lg" asp-action="index" asp-controller="client">
             Get Started
         </a>
     </div>
 </section>
 
 <!-- Features Section -->
+<div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-extrabold text-Secondary">What We Offer</h2>
+            <p class="mt-4 text-lg ">
+                We offer powerful tools to help freelancers manage their work more efficiently.
+            </p>
+
+        </div>
+
+        <!-- Services Grid -->
+        <div class="flex flex-wrap gap-[1rem] justify-evenly">
+            <!-- Service 1 -->
+            <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 w-[20rem]">
+
+                <h3 class="mt-6 text-xl font-bold ">Project Management</h3>
+                <p class="mt-4">
+                    Keep track of your freelance projects with ease, manage deadlines, tasks, and progress in one place.
+                </p>
+             
+
+                <button class="hover:bg-Secondary hover:text-ColorWhite py-2 px-4 rounded-[5px] shadow-lg  transition duration-300 border-2 hover:border-ColorWhite bg-ColorWhite text-Secondary border-Secondary shadow-lg text-sm  mt-2" >   <a asp-action="index" asp-controller="client">
+                        Get Started
+                    </a>
+                </button>
+              
+            </div>
+
+            <!-- Service 2 -->
+            <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 w-[20rem] ">
+
+                <h3 class="mt-6 text-xl font-bold ">Time Tracking</h3>
+                <p class="mt-4">
+                    Track your working hours effortlessly and manage billing with accurate time records.
+                </p>
+
+
+                <button class="hover:bg-Secondary hover:text-ColorWhite py-2 px-4 rounded-[5px] shadow-lg  transition duration-300 border-2 hover:border-ColorWhite bg-ColorWhite text-Secondary border-Secondary shadow-lg text-sm mt-2">
+                    <a asp-action="index" asp-controller="client">
+                        Get Started
+                    </a>
+                </button>
+
+            </div>
+       
+
+            <!-- Service 3 -->
+            <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 w-[20rem] ">
+
+                <h3 class="mt-6 text-xl font-bold ">Invoicing</h3>
+                <p class="mt-4">
+                    Create and send professional invoices, and keep track of your payments with our invoicing tool.
+                </p>
+
+
+                <button class="hover:bg-Secondary hover:text-ColorWhite py-2 px-4 rounded-[5px] shadow-lg  transition duration-300 border-2 hover:border-ColorWhite bg-ColorWhite text-Secondary border-Secondary shadow-lg text-sm mt-2">
+                    <a asp-action="index" asp-controller="client">
+                        Get Started
+                    </a>
+                </button>
+
+            </div>
+
+          
+        </div>
+    </div>
+</div>
+

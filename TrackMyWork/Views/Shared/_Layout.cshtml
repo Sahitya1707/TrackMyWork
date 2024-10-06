@@ -13,7 +13,7 @@
 </head>
 <body>
     <header>
-        <nav class="bg-primary p-4 w-[100vw]">
+        <nav class="bg-Primary p-4 w-[100vw] sticky top-0">
             <div class="container mx-auto flex justify-between items-center">
                 <!-- Logo/Image -->
                 <div class="flex items-center">
@@ -21,27 +21,27 @@
                     
                 </div>
 
-                <ul class="flex items-center gap-x-4 font-semibold uppercase text-ColorBlack font-semibold hover:underline">
-                    
-                        <li>
+                <ul class="flex items-center gap-x-4 font-semibold uppercase text-ColorBlack font-semibold ">
+
+                    <li class="hover:underline">
                         <a  asp-controller="home" asp-action="index" class="">
                             Home
                         </a>
                         
                         </li>
-                  <li>
+                    <li class="hover:underline">
                         <a   asp-action="index" asp-controller="client"> Clients </a>
                   </li>
 
-                    <li>
-                        <a href="/Projects" class="text-gray-300 hover:text-white">Projects</a>
+                    <li class="hover:underline">
+                        <a href="/Projects" class="e">Projects</a>
 
                    </li>
                    <li>
-                        <a href="/TimeTracking" class="text-gray-300 hover:text-white">Time Tracking</a>
+                        <a href="/TimeTracking" class="">Time Tracking</a>
                    </li>
-                   <li>
-                        <a href="/Invoices" class="text-gray-300 hover:text-white">Invoices</a>
+                    <li class ="hover:underline">
+                        <a href="/Invoices" class="">Invoices</a>
 
 </li>
                    
@@ -56,7 +56,7 @@
         </main>
     </div>
 
-    <footer class="bg-primary p-[2rem]">
+    <footer class="bg-Primary p-[2rem]">
         <div class="text-center ">
             &copy; 2024 - TrackMyWork - Sahitya Neupane - 200568451 - Georgian College Project - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-decoration-none text-decoration-underline-hover">Privacy</a>
         </div>
