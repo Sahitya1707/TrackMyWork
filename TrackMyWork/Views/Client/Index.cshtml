@@ -1,50 +1,38 @@
-﻿
-@model IEnumerable<TrackMyWork.Models.Client>
-
- <!-- model IEnumerable<TrackMywork.Models.Client -->
+﻿@model IEnumerable<TrackMyWork.Models.Client>
 
 @{
     ViewData["Title"] = "Client";
 }
- <h2 class="text-2xl font-extrabold text-Secondary text-center my-[10px] tracking-widest">Client List</h2>
+
+<h2 class="text-2xl font-extrabold text-Secondary text-center my-[10px] tracking-widest">Client List</h2>
+
 <div class="relative min-h-[80vh]">
     <button class="bg-ColorBlack p-2 border-2 border-Primary text-Primary duration-50 hover:bg-Primary transition-ease-in-out hover:text-ColorBlack hover:border-Primary top-0 right-[2rem] absolute">
-        <a asp-action="Create">
-             Add New Client
-            </a>
-       
+        <a asp-action="Create">Add New Client</a>
     </button>
-   
+
     <table class="border-collapse mx-auto">
         <thead>
-            <tr class=" ">
-                <th class="border-2 border-TextColorBlack p-4">
-                    @Html.DisplayNameFor(Model=>Model.FirstName)
-
-
-                </th>
-                <th class="border-2 border-ColorBlack p-4"> @Html.DisplayNameFor(Model=>Model.LastName)</th>
-                <th class="border-2 border-ColorBlack p-4">@Html.DisplayNameFor(Model=>Model.Email)</th>
-                  <th class="border-2 border-ColorBlack p-4">Actions</th>
+            <tr>
+                <th class="border-2 border-TextColorBlack p-4">First Name</th>
+                <th class="border-2 border-ColorBlack p-4">Last Name</th>
+                <th class="border-2 border-ColorBlack p-4">Email</th>
+                <th class="border-2 border-ColorBlack p-4">Actions</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model) {
-            <tr>
-                <td class="border-2 p-4">
-
-                        @Html.DisplayFor(modelItem => item.FirstName ?? "N/A")
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="border-2 p-4">     @Html.DisplayFor(modelItem => item.FirstName)</td>
+                    <td class="border-2 p-4"> @Html.DisplayFor(modelItem => item.LastName)</td>
+                    <td class="border-2 p-4"> @Html.DisplayFor(modelItem => item.Email)</td>
+                    <td class="border-2 flex p-4 gap-x-[5px]">
+                        <button class="bg-[red] border-2 border-ColorBlack text-ColorWhite p-2 text-sm hover:bg-ColorBlack hover:border-[red] rounded-[5px] uppercase" asp-route-id="@item.ClientId">Delete</button>
+                        <a class="bg-[green] border-2 border-ColorBlack text-ColorWhite p-2 text-sm hover:bg-ColorBlack hover:border-[green] rounded-[5px] uppercase" asp-action="Edit" asp-route-id="@item.ClientId">Edit</a>
                     </td>
-                <td class="border-2 p-4">Neupane</td>
-                <td class="border-2 p-4 ">neupanesahitya1@gmail.com</td>
-                <td class="border-2 flex p-4 gap-x-[5px]">
-                    <button class="bg-[red] border-2 border-ColorBlack text-ColorWhite p-2 text-sm hover:bg-ColorBlack hover:border-[red] rounded-[5px] uppercase">Delete</button>
-                     <button class="bg-[green] border-2 border-ColorBlack text-ColorWhite p-2 text-sm hover:bg-ColorBlack hover:border-[green] rounded-[5px] uppercase">Edit</button>
-                    
-                </td>
                 </tr>
             }
         </tbody>
-        </table>
-
-        </div>
+    </table>
+</div>
