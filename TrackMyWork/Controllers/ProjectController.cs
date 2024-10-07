@@ -17,8 +17,9 @@ namespace TrackMyWork.Controllers
         public async Task<IActionResult> Index()
         {
             // need to add clients or get the clients from the db in order to loop/use it in index.cshtml view
-           
-            var projects = await _context.Projects.ToListAsync();
+
+            var projects = await _context.Projects.Include(p => p.Client).ToListAsync();
+
 
             return View(projects);
         }
