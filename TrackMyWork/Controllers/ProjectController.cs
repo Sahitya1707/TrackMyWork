@@ -33,7 +33,7 @@ namespace TrackMyWork.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Project project)
+        public async Task<IActionResult> Create([Bind("Title, Description, ClientId, StartDate, DaysToComplete, Urgency")]Project project)
         {
            
             if (ModelState.IsValid)
@@ -48,6 +48,41 @@ namespace TrackMyWork.Controllers
             }
            
           
+            return View(project);
+        }
+        public async Task<IActionResult> Edit(int id)
+        {
+            var project = await _context.Projects.FindAsync(id);
+            if (project== null)
+            {
+                return NotFound();
+            }
+            ViewBag.Clients = await _context.Clients.ToListAsync();
+            return View(project);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Title, Description, ClientId, StartDate, DaysToComplete, Urgency")] Project project)
+        {
+            // checking if we goes inside if function or not
+            Console.WriteLine("this is outside");
+
+            if (id != project.ProjectId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                Console.WriteLine("Going inside");
+
+                _context.Update(project); // Update the client in the database
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index)); // Redirect to Index view
+
+
+            }
+
             return View(project);
         }
     }
