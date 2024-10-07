@@ -1,4 +1,6 @@
-﻿@model ﻿IEnumerable<TrackMyWork.Models.Client>
+﻿
+@model IEnumerable<TrackMyWork.Models.Client>
+
  <!-- model IEnumerable<TrackMywork.Models.Client -->
 
 @{
@@ -19,6 +21,7 @@
                 <th class="border-2 border-TextColorBlack p-4">
                     @Html.DisplayNameFor(Model=>Model.FirstName)
 
+
                 </th>
                 <th class="border-2 border-ColorBlack p-4"> @Html.DisplayNameFor(Model=>Model.LastName)</th>
                 <th class="border-2 border-ColorBlack p-4">@Html.DisplayNameFor(Model=>Model.Email)</th>
@@ -26,8 +29,12 @@
             </tr>
         </thead>
         <tbody>
+            @foreach (var item in Model) {
             <tr>
-                <td class="border-2 p-4">Sahitya </td>
+                <td class="border-2 p-4">
+
+                        @Html.DisplayFor(modelItem => item.FirstName ?? "N/A")
+                    </td>
                 <td class="border-2 p-4">Neupane</td>
                 <td class="border-2 p-4 ">neupanesahitya1@gmail.com</td>
                 <td class="border-2 flex p-4 gap-x-[5px]">
@@ -35,6 +42,8 @@
                      <button class="bg-[green] border-2 border-ColorBlack text-ColorWhite p-2 text-sm hover:bg-ColorBlack hover:border-[green] rounded-[5px] uppercase">Edit</button>
                     
                 </td>
+                </tr>
+            }
         </tbody>
         </table>
 

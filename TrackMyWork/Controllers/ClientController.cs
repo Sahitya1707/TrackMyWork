@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TrackMyWork.Data;
 using TrackMyWork.Models;
 
@@ -14,9 +15,11 @@ namespace TrackMyWork.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+// need to add clients or get the clients from the db in order to loop/use it in index.cshtml view
+            var clients = await _context.Clients.ToListAsync();
+            return View(clients);
         }
         public IActionResult Create()
         {
@@ -31,7 +34,7 @@ namespace TrackMyWork.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(client); // Add the new client to the database
-                await _context.SaveChangesAsync(); // Save changes asynchronously
+                await _context.SaveChangesAsync(); 
                 return RedirectToAction(nameof(Index)); // Redirect to Index view
             }
             return View(client);
