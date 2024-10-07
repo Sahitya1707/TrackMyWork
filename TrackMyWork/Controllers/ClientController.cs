@@ -69,7 +69,7 @@ namespace TrackMyWork.Controllers
             return View(client);
         }
 
-        // POST: Client/Edit/5
+        // POST: Client/Edit/
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ClientId, FirstName, LastName, Email")] Client client)
@@ -85,17 +85,40 @@ namespace TrackMyWork.Controllers
             if (ModelState.IsValid)
             {
                 Console.WriteLine("Going inside");
-                
-                    _context.Update(client); // Update the client in the database
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index)); // Redirect to Index view
-                
-                
+
+                _context.Update(client); // Update the client in the database
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index)); // Redirect to Index view
+
+
             }
 
-            return View(client); // Return the view with the client data if model state is not valid
+            return View(client);
         }
 
-        // Helper method to check if a client exists
+        // let's go with delete option now, I am trying to delete it instantly when you click the button
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            Console.WriteLine("We are inside here.");
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var client = await _context.Clients.FindAsync(id);
+            if (client == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                _context.Clients.Remove(client);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
+
+        }
     }
 }

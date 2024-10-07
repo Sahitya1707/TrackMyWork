@@ -28,7 +28,11 @@
                     <td class="border-2 p-4"> @Html.DisplayFor(modelItem => item.LastName)</td>
                     <td class="border-2 p-4"> @Html.DisplayFor(modelItem => item.Email)</td>
                     <td class="border-2 flex p-4 gap-x-[5px]">
-                        <button class="bg-[red] border-2 border-ColorBlack text-ColorWhite p-2 text-sm hover:bg-ColorBlack hover:border-[red] rounded-[5px] uppercase" asp-route-id="@item.ClientId">Delete</button>
+                       <!-- using form so that I can delete directly click here not using another view.-->
+                        <form asp-action="Delete" asp-route-id="@item.ClientId" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@item.ClientId" />
+                            <button type="submit" class="bg-[red] border-2 border-ColorBlack text-ColorWhite p-2 text-sm hover:bg-ColorBlack hover:border-[red] rounded-[5px] uppercase">Delete</button>
+                        </form>
                         <a class="bg-[green] border-2 border-ColorBlack text-ColorWhite p-2 text-sm hover:bg-ColorBlack hover:border-[green] rounded-[5px] uppercase" asp-action="Edit" asp-route-id="@item.ClientId">Edit</a>
                     </td>
                 </tr>
