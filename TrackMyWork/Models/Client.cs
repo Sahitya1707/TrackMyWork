@@ -6,18 +6,20 @@ namespace TrackMyWork.Models
         [Key]
         public int ClientId { get; set; }
 
-        [Required]
+// added error message, and required error message
+        [Required(ErrorMessage = "First Name is required.")]
         [Display(Name = "First Name")]
         [MaxLength(50)]
         public string FirstName { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Last Name is required.")]
         [Display(Name = "Last Name")]
         [MaxLength(50)]
         public string LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         [Display(Name = "Email Address")]
         public string Email { get; set; }
 

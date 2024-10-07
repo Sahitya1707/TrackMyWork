@@ -20,7 +20,7 @@ namespace TrackMyWork.Models
 
         // adding project id as a foreign key inorder ot include it
         [Display(Name = "Project")]
-        public int ProjectId    { get; set; }
+        public int ProjectId { get; set; }
         public Project? Project { get; set; }
 
     }
