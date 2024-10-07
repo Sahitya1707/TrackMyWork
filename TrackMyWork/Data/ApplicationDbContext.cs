@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 using TrackMyWork.Models;
 
 namespace TrackMyWork.Data
@@ -35,7 +36,13 @@ namespace TrackMyWork.Data
                 .HasOne(i => i.Project)  
                 .WithMany(p => p.Invoices) 
                 .HasForeignKey(i => i.ProjectId) 
-                .OnDelete(DeleteBehavior.ClientSetNull); 
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+             Builder.Entity<Project>()
+               .HasOne(p => p.Client)
+               .WithMany(c => c.Projects)
+               .HasForeignKey(p => p.ClientId)
+               .OnDelete(DeleteBehavior.ClientSetNull);
         }
        
     }

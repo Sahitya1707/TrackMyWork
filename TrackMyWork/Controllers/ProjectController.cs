@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TrackMyWork.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
+using TrackMyWork.Data;
+using TrackMyWork.Models;
 namespace TrackMyWork.Controllers
 {
     public class ProjectController : Controller
@@ -20,12 +22,32 @@ namespace TrackMyWork.Controllers
 
             return View(projects);
         }
-        public IActionResult Create() {
+        public async Task<IActionResult> Create() {
             /** view bag is just a general way to send data from controller to view, I need the client data so I did this https://stackify.com/viewbag/#:~:text=In%20general%2C%20ViewBag%20is%20a,was%20introduced%20in%20MVC%201.0).
              */
-            ViewBag.Clients = _context.Clients.ToList();
+         
+            ViewBag.Clients =await _context.Clients.ToListAsync();
             return View();
         }
-       
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Project project)
+        {
+           
+            if (ModelState.IsValid)
+            {
+                Console.WriteLine("Form submitted.");
+
+                // Save the project to the database
+                _context.Projects.Add(project);
+                await _context.SaveChangesAsync(); 
+
+                return RedirectToAction("Index");
+            }
+           
+          
+            return View(project);
+        }
     }
 }

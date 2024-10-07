@@ -15,6 +15,7 @@ namespace TrackMyWork.Models
         public string Description { get; set; }
 
         // Foreign Key
+        [Required]
         [Display(Name = "Client")]
         public int ClientId { get; set; }
 
