@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+
 namespace TrackMyWork.Models
 {
     public class Project
@@ -14,16 +15,29 @@ namespace TrackMyWork.Models
         public string Description { get; set; }
 
         // Foreign Key
-        [Display(Name = "Client")] // creates a one-to-many relationship, where each project belongs to one client, but a client can have multiple projects.
-        public int ClientId {  get; set; }
+        [Display(Name = "Client")]
+        public int ClientId { get; set; }
 
         public Client? Client { get; set; }
 
+        
+        [Display(Name = "Start Date")]
+        [DataType(DataType.Date)] 
+        [Required]
+        public DateTime StartDate { get; set; }
 
+        [Display(Name = "Days to Complete")]
+        [Range(1, 60)] 
+        public int DaysToComplete { get; set; }
 
-        // I am using Icollection thinking this can provide more flexiblity and this application might need upgrade in future.
-        public ICollection<TimeEntry> TimeEntries { get; set; } // one projects can have different time entries
-        public ICollection<Invoice> Invoices { get; set; } // one project can have different invoices
-        public ICollection<Message> Message { get; set; } // one projedct can have different message
+        [Display(Name = "Urgency")]
+        // 1 is higher urgency, 2 is medium and 3 is low
+        [Range(1, 3)] 
+        public int Urgency { get; set; }
+
+        // Navigation Properties
+        public ICollection<TimeEntry>? TimeEntries { get; set; } // One project can have different time entries
+        public ICollection<Invoice>? Invoices { get; set; } // One project can have different invoices
+        public ICollection<Message>? Messages { get; set; } // One project can have different messages
     }
 }
