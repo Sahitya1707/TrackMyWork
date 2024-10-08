@@ -35,8 +35,9 @@ namespace TrackMyWork.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Title, Description, ClientId, StartDate, DaysToComplete, Urgency")]Project project)
         {
-           
-            if (ModelState.IsValid)
+       
+
+                if (ModelState.IsValid)
             {
                 Console.WriteLine("Form submitted.");
 
@@ -84,6 +85,30 @@ namespace TrackMyWork.Controllers
             }
 
             return View(project);
+        }
+// Delete function
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            Console.WriteLine("We are inside here.");
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var project = await _context.Projects.FindAsync(id);
+            if (project == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                _context.Projects.Remove(project);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
+
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -35,7 +36,9 @@ namespace TrackMyWork.Controllers
         public async Task<IActionResult> Create([Bind("ClientId, FirstName, LastName, Email")] Client client)
         {
             // just checking if this is going inside or not.
-            // Console.WriteLine("this is outdie the mode valid");
+             Console.WriteLine("this is outdie the mode valid");
+           
+
             // Console.WriteLine(ModelState);
             if (ModelState.IsValid)
             {
