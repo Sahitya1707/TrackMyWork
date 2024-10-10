@@ -4,26 +4,26 @@
 
 
 
- <section class=" h-[100%] w-[100vw] flex items-center justify-center relative">
+ <section class="relative flex h-[100vh] w-[100vw] items-center justify-center">
      <!-- 
 
      What is URL.content???
      https://stackoverflow.com/questions/25625162/is-there-a-benefit-to-using-url-content
      -->
-    <div class="top-0 bottom-0 h-[100%] w-[100%] bg-cover bg-center absolute" style="background-image: url('@Url.Content("~/images/freelance.jpg")');"></div>
+    <div class="absolute bottom-0 top-0 h-[100%] w-[100%] bg-cover bg-center" style="background-image: url('@Url.Content("~/images/freelance.jpg")');"></div>
 
-    <div class="relative z-10 text-left text-ColorWhite w-[80%] ">
-        <h1 class="text-4xl font-bold mb-4 tracking-widest uppercase"
+    <div class="z-10 relative w-[80%] text-left text-ColorWhite">
+        <h1 class="mb-4 text-4xl font-bold uppercase tracking-widest"
         style="
 text-shadow:8px 5px 10px black;
 "
         >Got Lost While Tracking the Work?</h1>
-        <p class="text-xl mb-8"
+        <p class="mb-8 text-xl"
         style="
 text-shadow:8px 5px 10px black;
 "
         >Let us manage clients, handle invoicing all for you in one place.</p>
-        <a class="bg-Secondary text-ColorWhite py-3 px-6 rounded-[5px] shadow-lg  transition duration-300 border-2 border-ColorWhite hover:bg-ColorWhite hover:text-Secondary hover:border-Secondary shadow-lg" asp-action="index" asp-controller="client">
+        <a class="border-2 rounded-[5px] border-ColorWhite bg-Secondary px-6 py-3 text-ColorWhite shadow-lg shadow-lg transition duration-300 hover:bg-ColorWhite hover:text-Secondary hover:border-Secondary" asp-action="index" asp-controller="client">
             Get Started
         </a>
     </div>
@@ -31,27 +31,27 @@ text-shadow:8px 5px 10px black;
 
 <!-- Features Section -->
 <div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2">
-        <div class="text-center mb-12">
+    <div class="mx-auto mt-2 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-12 text-center">
             <h2 class="text-3xl font-extrabold text-Secondary">What We Offer</h2>
-            <p class="mt-4 text-lg ">
+            <p class="mt-4 text-lg">
                 We offer powerful tools to help freelancers manage their work more efficiently.
             </p>
 
         </div>
 
         <!-- Services Grid -->
-        <div class="flex flex-wrap gap-[1rem] justify-evenly">
+        <div class="flex flex-wrap justify-evenly gap-[1rem]">
             <!-- Service 1 -->
-            <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 w-[20rem]">
+            <div class="bg-white w-[20rem] rounded-lg p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
 
-                <h3 class="mt-6 text-xl font-bold ">Project Management</h3>
+                <h3 class="mt-6 text-xl font-bold">Project Management</h3>
                 <p class="mt-4">
                     Keep track of your freelance projects with ease, manage deadlines, tasks, and progress in one place.
                 </p>
              
 
-                <a asp-action="index" asp-controller="project" class="hover:bg-Secondary hover:text-ColorWhite py-2 px-4 rounded-[5px] shadow-lg  transition duration-300 border-2 hover:border-ColorWhite bg-ColorWhite text-Secondary border-Secondary shadow-lg text-sm  mt-2">
+                <a asp-action="index" asp-controller="project" class="border-2 mt-2 rounded-[5px] border-Secondary bg-ColorWhite px-4 py-2 text-sm text-Secondary shadow-lg shadow-lg transition duration-300 hover:bg-Secondary hover:text-ColorWhite hover:border-ColorWhite">
                         Get Started
                     </a>
                
@@ -59,15 +59,15 @@ text-shadow:8px 5px 10px black;
             </div>
 
             <!-- Service 2 -->
-            <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 w-[20rem] ">
+            <div class="bg-white w-[20rem] rounded-lg p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
 
-                <h3 class="mt-6 text-xl font-bold ">Time Tracking</h3>
+                <h3 class="mt-6 text-xl font-bold">Time Tracking</h3>
                 <p class="mt-4">
                     Track your working hours effortlessly and manage billing with accurate time records.
                 </p>
 
 
-                <button class="hover:bg-Secondary hover:text-ColorWhite py-2 px-4 rounded-[5px] shadow-lg  transition duration-300 border-2 hover:border-ColorWhite bg-ColorWhite text-Secondary border-Secondary shadow-lg text-sm mt-2">
+                <button class="border-2 mt-2 rounded-[5px] border-Secondary bg-ColorWhite px-4 py-2 text-sm text-Secondary shadow-lg shadow-lg transition duration-300 hover:bg-Secondary hover:text-ColorWhite hover:border-ColorWhite">
                     <a asp-action="index" asp-controller="client">
                         Get Started
                     </a>
@@ -77,16 +77,16 @@ text-shadow:8px 5px 10px black;
        
 
             <!-- Service 3 -->
-            <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 w-[20rem] ">
+            <div class="bg-white w-[20rem] rounded-lg p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
 
-                <h3 class="mt-6 text-xl font-bold ">Invoicing</h3>
+                <h3 class="mt-6 text-xl font-bold">Invoicing</h3>
                 <p class="mt-4">
                     Create and send professional invoices, and keep track of your payments with our invoicing tool.
                 </p>
 
 
              
-                    <a asp-action="index" asp-controller="client" class="hover:bg-Secondary hover:text-ColorWhite py-2 px-4 rounded-[5px] shadow-lg  transition duration-300 border-2 hover:border-ColorWhite bg-ColorWhite text-Secondary border-Secondary shadow-lg text-sm mt-2">
+                    <a asp-action="index" asp-controller="client" class="border-2 mt-2 rounded-[5px] border-Secondary bg-ColorWhite px-4 py-2 text-sm text-Secondary shadow-lg shadow-lg transition duration-300 hover:bg-Secondary hover:text-ColorWhite hover:border-ColorWhite">
                         Get Started
                     </a>
                

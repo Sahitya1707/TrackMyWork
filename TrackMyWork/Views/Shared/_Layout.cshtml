@@ -9,25 +9,27 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/output.css">
- 
+    <link rel="stylesheet" href="~/css/styles.css">
+
 
 </head>
 <body>
     <header>
         <nav class="relative md:p-0 md:w-auto">
+            <div class="z-[50] fixed right-0 top-0 hidden h-[100vh] w-[100vw] bg-ColorBlack bg-opacity-50" id="overlay"></div>
             <a asp-action="home" asp-controller="index">
-                <img src="https://png.pngtree.com/png-vector/20211023/ourmid/pngtree-salon-logo-png-image_4004444.png" alt="Logo" class="w-[5rem] fixed top-[2%] left-[2%] h-[5rem] border-2 border-ColorWhite z-[50] rounded-full p-2">
+                <img src="https://png.pngtree.com/png-vector/20211023/ourmid/pngtree-salon-logo-png-image_4004444.png" alt="Logo" class="border-2 z-[50] fixed left-[2%] top-[2%] h-[5rem] w-[5rem] rounded-full border-ColorWhite p-2">
 
             </a>
 
 
-            <div class="fixed top-[2%] right-[2%] border-2 border-ColorWhite rounded-full p-2 text-ColorWhite z-[50] flex items-center justify-center h-[3rem] w-[3rem] cursor-pointer" id="hamBurger">
+            <div class="border-2 z-[50] fixed right-[2%] top-[2%] flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center rounded-full border-ColorWhite p-2 text-ColorWhite" id="hamBurger">
                 <span class="material-symbols-outlined">menu</span>
             </div>
 
-            <div class="fixed top-0 right-0 w-[250px] h-full bg-ColorBlack transform translate-x-full transition-transform duration-300 ease-in-out z-[50] overflow-hidden" id="navMenu">
+            <div class="z-[50] fixed right-0 top-0 h-full w-[250px] translate-x-full transform overflow-hidden bg-ColorBlack transition-transform duration-300 ease-in-out" id="navMenu">
                 <div class="flex justify-end p-4">
-                    <div class="border-2 border-2 border-ColorWhite rounded-full p-2 text-ColorWhite z-[50] flex items-center justify-center h-[3rem] w-[3rem] cursor-pointer" id="closeNav">
+                    <div class="border-2 border-2 z-[50] flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center rounded-full border-ColorWhite p-2 text-ColorWhite" id="closeNav">
                         <span class="material-symbols-outlined">close</span>
                     </div>
                 </div>
@@ -52,13 +54,13 @@
         </nav>
     </header>
 
-        <main role="main" class="w-[100vw] h-[100vh]">
+        <main role="main" class="min-h-[100vh] min-w-[100vw]">
             @RenderBody()
         </main>
 
 
-    <footer class="bg-Primary p-[2rem] w-[100vw]">
-        <div class="text-center ">
+    <footer class="w-[100vw] bg-Primary p-[2rem]">
+        <div class="text-center">
             &copy; 2024 - TrackMyWork - Sahitya Neupane - 200568451 - Georgian College Project - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-decoration-none text-decoration-underline-hover">Privacy</a>
         </div>
     </footer>
