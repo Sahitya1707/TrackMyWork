@@ -14,64 +14,48 @@
 </head>
 <body>
     <header>
-        <nav class="md:p-0  md:w-auto ">
-            <div class="fixed top-[2%] right-[2%] border-2 border-ColorWhite rounded-full p-2 text-ColorWhite z-[50]  flex items-center justify-center  h-[3rem] w-[3rem] cursor-pointer">
+        <nav class="relative md:p-0 md:w-auto">
+            <a asp-action="home" asp-controller="index">
+                <img src="https://png.pngtree.com/png-vector/20211023/ourmid/pngtree-salon-logo-png-image_4004444.png" alt="Logo" class="w-[5rem] fixed top-[2%] left-[2%] h-[5rem] border-2 border-ColorWhite z-[50] rounded-full p-2">
 
-                <span class="material-symbols-outlined" id="hamBurger">
-                    menu
-                </span>
+            </a>
+
+
+            <div class="fixed top-[2%] right-[2%] border-2 border-ColorWhite rounded-full p-2 text-ColorWhite z-[50] flex items-center justify-center h-[3rem] w-[3rem] cursor-pointer" id="hamBurger">
+                <span class="material-symbols-outlined">menu</span>
             </div>
 
-
-            <div class="container mx-auto flex md:block justify-between items-center">
-                <!-- Logo/Image -->
-                <a asp-action="home" asp-controller="index">
-                    <img src="https://png.pngtree.com/png-vector/20211023/ourmid/pngtree-salon-logo-png-image_4004444.png" alt="Logo" class="w-[5rem] fixed top-[2%] left-[2%] h-[5rem] border-2 border-ColorWhite z-[50] rounded-full p-2">
-
-                </a>
-
-                <ul class=" top-[0%] right-[0]  fixed items-center gap-x-4 font-semibold uppercase text-ColorWhite font-semibold fixed z-[50] bg-ColorBlack z-[51] ">
-                    <div class=" border-2 border-ColorWhite rounded-full p-2 text-ColorWhite z-[50]  flex items-center justify-center  h-[3rem] w-[3rem] cursor-pointer">
-                        <span class="material-symbols-outlined" id="close">
-                           close
-                        </span>
+            <div class="fixed top-0 right-0 w-[250px] h-full bg-ColorBlack transform translate-x-full transition-transform duration-300 ease-in-out z-[50] overflow-hidden" id="navMenu">
+                <div class="flex justify-end p-4">
+                    <div class="border-2 border-2 border-ColorWhite rounded-full p-2 text-ColorWhite z-[50] flex items-center justify-center h-[3rem] w-[3rem] cursor-pointer" id="closeNav">
+                        <span class="material-symbols-outlined">close</span>
                     </div>
-
+                </div>
+                <ul class="flex flex-col items-center gap-y-4 font-semibold uppercase text-ColorWhite">
                     <li class="hover:underline">
-                        <a  asp-controller="home" asp-action="index" class="">
-                            Home
-                        </a>
-                        
-                        </li>
+                        <a asp-controller="home" asp-action="index">Home</a>
+                    </li>
                     <li class="hover:underline">
-                        <a   asp-action="index" asp-controller="client"> Clients </a>
-                  </li>
-
+                        <a asp-action="index" asp-controller="client">Clients</a>
+                    </li>
                     <li class="hover:underline">
-
                         <a asp-action="index" asp-controller="project">Project</a>
-
-                   </li>
-                   <li class="hover:underline">
-                        <a href="/TimeTracking" class="">Time Tracking</a>
-                   </li>
-                    <li class ="hover:underline">
-                        <a href="/Invoices" class="">Invoices</a>
-
-</li>
-                   
-                
+                    </li>
+                    <li class="hover:underline">
+                        <a href="/TimeTracking">Time Tracking</a>
+                    </li>
+                    <li class="hover:underline">
+                        <a href="/Invoices">Invoices</a>
+                    </li>
                 </ul>
             </div>
-          
         </nav>
-        
     </header>
-    <div class="">
+
         <main role="main" class="w-[100vw] h-[100vh]">
             @RenderBody()
         </main>
-    </div>
+
 
     <footer class="bg-Primary p-[2rem] w-[100vw]">
         <div class="text-center ">
@@ -83,6 +67,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+ 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
