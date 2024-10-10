@@ -13,19 +13,27 @@
     <div class="absolute bottom-0 top-0 h-[100%] w-[100%] bg-cover bg-center" style="background-image: url('@Url.Content("~/images/freelance.jpg")');"></div>
 
     <div class="z-10 relative w-[80%] text-left text-ColorWhite">
-        <h1 class="mb-4 text-4xl font-bold uppercase tracking-widest"
+        <h1 class="mb-4 text-4xl font-bold uppercase tracking-wider shadow-sm"
         style="
-text-shadow:8px 5px 10px black;
+
 "
         >Got Lost While Tracking the Work?</h1>
-        <p class="mb-8 text-xl"
+        <p class="shadow- mb-8 text-xl"
         style="
-text-shadow:8px 5px 10px black;
+
 "
-        >Let us manage clients, handle invoicing all for you in one place.</p>
-        <a class="border-2 rounded-[5px] border-ColorWhite bg-Secondary px-6 py-3 text-ColorWhite shadow-lg shadow-lg transition duration-300 hover:bg-ColorWhite hover:text-Secondary hover:border-Secondary" asp-action="index" asp-controller="client">
-            Get Started
-        </a>
+        >Let us manage clients,projects, handle invoicing all for you in one place.</p>
+        <div class="flex items-center gap-x-6">
+            <a class="border-2 rounded-[5px] border-ColorWhite bg-Secondary px-6 py-3 text-ColorWhite shadow-lg transition duration-300 hover:bg-ColorWhite hover:text-Secondary hover:border-Secondary" asp-action="index" asp-controller="client">
+                Get Started
+            </a>
+            <div class="items-cen flex">
+                <a class="border-2 rounded-[5px] border-Secondary bg-ColorWhite px-6 py-3 text-Secondary shadow-lg transition duration-300 hover:border-ColorWhite hover:bg-Secondary hover:text-ColorWhite" asp-action="index" asp-controller="client">
+                  Login
+                </a>
+            </div>
+        </div>
+     
     </div>
 </section>
 
