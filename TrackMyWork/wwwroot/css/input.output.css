@@ -887,6 +887,14 @@ video {
   overflow: hidden;
 }
 
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.overflow-x-clip {
+  overflow-x: clip;
+}
+
 .rounded-\[5px\] {
   border-radius: 5px;
 }
