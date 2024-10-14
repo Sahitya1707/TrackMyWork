@@ -6,59 +6,61 @@
     <title>@ViewData["Title"] - TrackMyWork</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/output.css">
- 
+    <link rel="stylesheet" href="~/css/styles.css">
+
 
 </head>
 <body>
     <header>
-        <nav class="bg-Primary p-4 w-[100vw] sticky top-0">
-            <div class="container mx-auto flex justify-between items-center">
-                <!-- Logo/Image -->
-                <div class="flex items-center">
-                    <img src="https://png.pngtree.com/png-vector/20211023/ourmid/pngtree-salon-logo-png-image_4004444.png" alt="Logo" class="h-10 w-10 mr-3 ">
-                    
+        <nav class="relative md:p-0 md:w-auto">
+            <div class="z-[50] fixed right-0 top-0 hidden h-[100vh] w-[100vw] bg-ColorBlack bg-opacity-50" id="overlay"></div>
+            <a asp-action="home" asp-controller="index">
+                <img src="https://png.pngtree.com/png-vector/20211023/ourmid/pngtree-salon-logo-png-image_4004444.png" alt="Logo" class="border-2 z-[50] fixed left-[2%] top-[2%] h-[5rem] w-[5rem] rounded-full border-ColorWhite p-2">
+
+            </a>
+
+
+            <div class="border-2 z-[50] fixed right-[2%] top-[2%] flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center rounded-full border-ColorWhite p-2 text-ColorWhite" id="hamBurger">
+                <span class="material-symbols-outlined">menu</span>
+            </div>
+
+            <div class="z-[50] fixed right-0 top-0 h-full w-[250px] translate-x-full transform overflow-hidden bg-ColorBlack transition-transform duration-300 ease-in-out" id="navMenu">
+                <div class="flex justify-end p-4">
+                    <div class="border-2 z-[50] flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center rounded-full border-ColorWhite p-2 text-ColorWhite" id="closeNav">
+                        <span class="material-symbols-outlined">close</span>
+                    </div>
                 </div>
-
-                <ul class="flex items-center gap-x-4 font-semibold uppercase text-ColorBlack font-semibold ">
-
-                    <li class="hover:underline">
-                        <a  asp-controller="home" asp-action="index" class="">
-                            Home
-                        </a>
-                        
-                        </li>
-                    <li class="hover:underline">
-                        <a   asp-action="index" asp-controller="client"> Clients </a>
-                  </li>
-
-                    <li class="hover:underline">
-
+                <ul class="px-[30px] text-left font-semibold uppercase text-ColorWhite">
+                    <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
+                        <a asp-controller="home" asp-action="index">Home</a>
+                    </li>
+                    <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
+                        <a asp-action="index" asp-controller="client">Clients</a>
+                    </li>
+                    <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
                         <a asp-action="index" asp-controller="project">Project</a>
-
-                   </li>
-                   <li class="hover:underline">
-                        <a href="/TimeTracking" class="">Time Tracking</a>
-                   </li>
-                    <li class ="hover:underline">
-                        <a href="/Invoices" class="">Invoices</a>
-
-</li>
-                   
-                
+                    </li>
+                    <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
+                        <a href="/TimeTracking">Time Tracking</a>
+                    </li>
+                    <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
+                        <a href="/Invoices">Invoices</a>
+                    </li>
                 </ul>
             </div>
         </nav>
     </header>
-    <div class="">
-        <main role="main" class="pb-3">
+
+        <main role="main" class="min-h-[100vh] min-w-[100vw]">
             @RenderBody()
         </main>
-    </div>
 
-    <footer class="bg-Primary p-[2rem] w-[100vw]">
-        <div class="text-center ">
+
+    <footer class="w-[100vw] bg-Primary p-[2rem]">
+        <div class="text-center">
             &copy; 2024 - TrackMyWork - Sahitya Neupane - 200568451 - Georgian College Project - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-decoration-none text-decoration-underline-hover">Privacy</a>
         </div>
     </footer>
@@ -67,6 +69,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+ 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
