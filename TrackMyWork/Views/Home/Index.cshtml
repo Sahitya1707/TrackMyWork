@@ -10,26 +10,25 @@
      What is URL.content???
      https://stackoverflow.com/questions/25625162/is-there-a-benefit-to-using-url-content
      -->
-    <div class="absolute bottom-0 top-0 h-[100%] w-[100%] bg-cover bg-center" style="background-image: url('@Url.Content("~/images/freelance.jpg")');"></div>
+    <div class="absolute bottom-0 top-0 h-[100%] w-[100%] bg-cover bg-fixed bg-center" style="background-image: url('@Url.Content("~/images/freelance.jpg")');"></div>
 
     <div class="z-10 relative w-[80%] text-left text-ColorWhite">
         <h1 class="mb-4 text-4xl font-bold uppercase tracking-wider shadow-sm"
         style="
-
+text-shadow: 3px 3px 3px black;
 "
         >Got Lost While Tracking the Work?</h1>
-        <p class="shadow- mb-8 text-xl"
-        style="
-
-"
-        >Let us manage clients,projects, handle invoicing all for you in one place.</p>
+        <p class="mb-8 text-xl" style="    text-shadow: 3px 3px 3px black;">Let us manage clients,projects, handle invoicing all for you in one place.</p>
         <div class="flex items-center gap-x-6">
             <a class="border-2 rounded-[5px] border-ColorWhite bg-Secondary px-6 py-3 text-ColorWhite shadow-lg transition duration-300 hover:bg-ColorWhite hover:text-Secondary hover:border-Secondary" asp-action="index" asp-controller="client">
                 Get Started
             </a>
-            <div class="items-cen flex">
-                <a class="border-2 rounded-[5px] border-Secondary bg-ColorWhite px-6 py-3 text-Secondary shadow-lg transition duration-300 hover:border-ColorWhite hover:bg-Secondary hover:text-ColorWhite" asp-action="index" asp-controller="client">
-                  Login
+            <div class="">
+               
+                <a class="border-2 rounded-[5px] border-ColorBlack bg-Primary px-6 py-3 text-ColorBlack shadow-lg transition duration-300 hover:border-Primary hover:text-Primary hover:bg-ColorBlack" asp-action="index" asp-controller="client">
+                 Already a user? <span class="font-bold">
+                        Login
+                 </span> 
                 </a>
             </div>
         </div>
@@ -42,9 +41,9 @@
     <div class="mx-auto mt-2 max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mb-12 text-center">
             <h2 class="text-3xl font-extrabold text-Secondary">What We Offer</h2>
-            <p class="mt-4 text-lg">
+            <p class="mt-4 text-lg text-[red]">
                 We offer powerful tools to help freelancers manage their work more efficiently.
-            </p>
+            </p> 
 
         </div>
 
