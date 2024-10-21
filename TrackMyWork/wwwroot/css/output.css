@@ -863,6 +863,10 @@ video {
   gap: 1rem;
 }
 
+.gap-6 {
+  gap: 1.5rem;
+}
+
 .gap-x-6 {
   -moz-column-gap: 1.5rem;
        column-gap: 1.5rem;
@@ -937,6 +941,11 @@ video {
 .border-Secondary {
   --tw-border-opacity: 1;
   border-color: rgb(var(--color-secondary) / var(--tw-border-opacity) );
+}
+
+.border-\[grey\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(128 128 128 / var(--tw-border-opacity));
 }
 
 .bg-ColorBlack {
@@ -1024,6 +1033,11 @@ video {
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+}
+
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .text-left {
@@ -1126,6 +1140,11 @@ video {
   color: rgb(255 255 0 / var(--tw-text-opacity));
 }
 
+.text-Primary {
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-primary) / var(--tw-text-opacity) );
+}
+
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
@@ -1223,6 +1242,11 @@ video {
 .hover\:bg-Secondary:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-secondary) / var(--tw-bg-opacity) );
+}
+
+.hover\:bg-Primary:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(var(--color-primary) / var(--tw-bg-opacity) );
 }
 
 .hover\:bg-opacity-30:hover {

@@ -37,71 +37,99 @@ text-shadow: 3px 3px 3px black;
     </div>
 </section>
 
+
 <!-- Features Section -->
-<div>
+<section class="bg-gray-100 border-b-2 border-solid border-[grey] py-12">
     <div class="mx-auto mt-2 max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mb-12 text-center">
             <h2 class="text-3xl font-extrabold text-Secondary">What We Offer</h2>
-            <p class="mt-4 text-lg text-[red]">
+            <p class="text-gray-600 mt-4 text-lg">
                 We offer powerful tools to help freelancers manage their work more efficiently.
-            </p> 
-
+            </p>
         </div>
 
         <!-- Services Grid -->
-        <div class="flex flex-wrap justify-evenly gap-[1rem]">
+        <div class="flex flex-wrap justify-center gap-6">
             <!-- Service 1 -->
             <div class="bg-white w-[20rem] rounded-lg p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
-
                 <h3 class="mt-6 text-xl font-bold">Project Management</h3>
-                <p class="mt-4">
+                <p class="text-gray-600 mt-4">
                     Keep track of your freelance projects with ease, manage deadlines, tasks, and progress in one place.
                 </p>
              
 
-                <a asp-action="index" asp-controller="project" class="border-2 mt-2 rounded-[5px] border-Secondary bg-ColorWhite px-4 py-2 text-sm text-Secondary shadow-lg shadow-lg transition duration-300 hover:bg-Secondary hover:text-ColorWhite hover:border-ColorWhite">
+                <button class="mt-6">
+                    <a asp-action="index" asp-controller="project" class="border-2 rounded-[5px] border-Secondary bg-ColorWhite px-4 py-2 text-sm text-Secondary shadow-lg transition duration-300 hover:bg-Secondary hover:text-ColorWhite hover:border-ColorWhite">
                         Get Started
                     </a>
+                    </button>
                
-              
             </div>
 
             <!-- Service 2 -->
             <div class="bg-white w-[20rem] rounded-lg p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
-
                 <h3 class="mt-6 text-xl font-bold">Time Tracking</h3>
-                <p class="mt-4">
+                <p class="text-gray-600 mt-4">
                     Track your working hours effortlessly and manage billing with accurate time records.
                 </p>
-
-
-                <button class="border-2 mt-2 rounded-[5px] border-Secondary bg-ColorWhite px-4 py-2 text-sm text-Secondary shadow-lg shadow-lg transition duration-300 hover:bg-Secondary hover:text-ColorWhite hover:border-ColorWhite">
-                    <a asp-action="index" asp-controller="client">
+                <button class="mt-6">
+                    <a asp-action="index" asp-controller="project" class="border-2 rounded-[5px] border-Secondary bg-ColorWhite px-4 py-2 text-sm text-Secondary shadow-lg transition duration-300 hover:bg-Secondary hover:text-ColorWhite hover:border-ColorWhite">
                         Get Started
                     </a>
                 </button>
-
             </div>
-       
 
             <!-- Service 3 -->
             <div class="bg-white w-[20rem] rounded-lg p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
-
                 <h3 class="mt-6 text-xl font-bold">Invoicing</h3>
-                <p class="mt-4">
+                <p class="text-gray-600 mt-4">
                     Create and send professional invoices, and keep track of your payments with our invoicing tool.
                 </p>
-
-
-             
-                    <a asp-action="index" asp-controller="client" class="border-2 mt-2 rounded-[5px] border-Secondary bg-ColorWhite px-4 py-2 text-sm text-Secondary shadow-lg shadow-lg transition duration-300 hover:bg-Secondary hover:text-ColorWhite hover:border-ColorWhite">
+                <button class="mt-6">
+                    <a asp-action="index" asp-controller="project" class="border-2 rounded-[5px] border-Secondary bg-ColorWhite px-4 py-2 text-sm text-Secondary shadow-lg transition duration-300 hover:bg-Secondary hover:text-ColorWhite hover:border-ColorWhite">
                         Get Started
                     </a>
-               
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
 
+
+
+<div class="bg-white border-b-2 border-solid border-[grey] py-12">
+    <div class="mx-auto mt-2 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-12 text-center">
+            <h2 class="text-3xl font-extrabold text-Secondary">Getting Started is Easy!</h2>
+            <p class="text-gray-600 mt-4 text-lg">
+                Follow these simple steps to start managing your projects and clients effectively.
+            </p>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-6">
+    
+            <div class="bg-gray-100 w-[20rem] rounded-lg p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
+                <h3 class="mt-6 text-xl font-bold">Step 1: Sign Up</h3>
+                <p class="text-gray-600 mt-4">
+                    Create your free account and unlock all features designed for your success.
+                </p>
             </div>
 
-          
+        
+            <div class="bg-gray-100 w-[20rem] rounded-lg p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
+                <h3 class="mt-6 text-xl font-bold">Step 2: Set Up Your Projects</h3>
+                <p class="text-gray-600 mt-4">
+                    Add your projects, define tasks, and set deadlines to stay on track.
+                </p>
+            </div>
+
+         
+            <div class="bg-gray-100 w-[20rem] rounded-lg p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
+                <h3 class="mt-6 text-xl font-bold">Step 3: Manage & Track</h3>
+                <p class="text-gray-600 mt-4">
+                    Start managing your clients and track your progress with ease.
+                </p>
+            </div>
         </div>
     </div>
 </div>
