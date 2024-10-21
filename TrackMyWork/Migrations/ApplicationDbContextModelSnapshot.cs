@@ -505,7 +505,6 @@ namespace TrackMyWork.Migrations
                     b.HasOne("TrackMyWork.Models.Client", "Client")
                         .WithMany("Projects")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Client");

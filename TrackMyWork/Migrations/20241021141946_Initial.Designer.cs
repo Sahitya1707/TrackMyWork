@@ -12,8 +12,8 @@ using TrackMyWork.Data;
 namespace TrackMyWork.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241007023930_UpdateInvoiceRelationships")]
-    partial class UpdateInvoiceRelationships
+    [Migration("20241021141946_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -333,14 +333,23 @@ namespace TrackMyWork.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
+                    b.Property<int>("DaysToComplete")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("Urgency")
+                        .HasColumnType("int");
 
                     b.HasKey("ProjectId");
 
@@ -412,7 +421,7 @@ namespace TrackMyWork.Migrations
                         .HasForeignKey("ClientId1");
 
                     b.HasOne("TrackMyWork.Models.Project", null)
-                        .WithMany("Message")
+                        .WithMany("Messages")
                         .HasForeignKey("ProjectId");
 
                     b.HasOne("TrackMyWork.Models.User", "User")
@@ -499,7 +508,6 @@ namespace TrackMyWork.Migrations
                     b.HasOne("TrackMyWork.Models.Client", "Client")
                         .WithMany("Projects")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Client");
@@ -535,7 +543,7 @@ namespace TrackMyWork.Migrations
                 {
                     b.Navigation("Invoices");
 
-                    b.Navigation("Message");
+                    b.Navigation("Messages");
 
                     b.Navigation("TimeEntries");
                 });
