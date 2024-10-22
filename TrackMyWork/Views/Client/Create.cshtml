@@ -2,38 +2,51 @@
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 @{
-    ViewData["Title"] = "Add Client";
+    ViewData["Title"] = "Add New Client";
 }
-<h2 class="text-2xl font-extrabold text-Secondary text-center my-[10px] tracking-widest mt-8">Add Client</h2>
-<div class="mt-[6rem] min-h-[80vh]">
-    <form asp-action="Create" asp-controller="Client" method="post" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto">
+<div class="border-b-2 relative flex h-[25rem] w-full items-center justify-center border-solid bg-Primary bg-cover bg-no-repeat" style="background: rgb(252,158,255);
+background: linear-gradient(200deg, rgba(252,158,255,1) 1%, rgba(213,213,213,1) 61%, rgba(144,230,255,1) 100%);">
+    <p class="relative mb-6 text-center text-5xl font-bold uppercase tracking-widest text-Primary" style="-webkit-text-stroke:1px black;">
+        @ViewData["Title"]
+    </p>
+</div>
+<div class="mt-[1rem] min-h-[80vh] px-4">
+    
+    <div class="mt-6 flex justify-end">
+        <div class="mt-6 flex justify-end">
+        <a href="@Url.Action("Index")"
+           class="border-2 cursor-pointer rounded-md border-solid bg-Secondary px-6 py-3 text-sm font-semibold text-ColorWhite shadow-md transition duration-300 hover:bg-ColorWhite hover:text-Secondary">
+           Back to Clients
+        </a></div>
+    </div>
+    <form asp-action="Create" asp-controller="Client" method="post" enctype="multipart/form-data" class="bg-white mx-auto max-w-lg space-y-6 rounded-lg p-6 shadow-lg">
         @Html.AntiForgeryToken()
         <div asp-validation-summary="ModelOnly" class="text-red-500 mb-4"></div>
 
         <!-- First Name -->
         <div class="">
-            <label asp-for="FirstName" class="block text-sm font-medium text-gray-700 mb-1"></label>
+            <label asp-for="FirstName" class="text-gray-700 mb-1 block text-sm font-medium"></label>
             <span asp-validation-for="FirstName" class="text-red-500 text-sm"></span>
-            <input asp-for="FirstName" class="mt-1 block w-full rounded-md border-2 border-Secondary shadow-sm focus:outline-none sm:text-sm p-2" name="FirstName" required/>
+            <input asp-for="FirstName" class="border-2 mt-1 block w-full rounded-md border-Secondary p-2 shadow-sm focus:outline-none sm:text-sm" name="FirstName" required/>
         </div>
        
         <!-- Last Name -->
         <div class="">
-            <label asp-for="LastName" class="block text-sm font-medium text-gray-700 mb-1"></label>
+            <label asp-for="LastName" class="text-gray-700 mb-1 block text-sm font-medium"></label>
             <span asp-validation-for="LastName" class="text-red-500 text-sm"></span>
-            <input asp-for="LastName" class="mt-1 block w-full rounded-md border-2 border-Secondary shadow-sm focus:outline-none sm:text-sm p-2" required name="LastName"/>
+            <input asp-for="LastName" class="border-2 mt-1 block w-full rounded-md border-Secondary p-2 shadow-sm focus:outline-none sm:text-sm" required name="LastName"/>
         </div>
 
         <!-- Email -->
         <div class="">
-            <label asp-for="Email" class="block text-sm font-medium text-gray-700 mb-1"></label>
+            <label asp-for="Email" class="text-gray-700 mb-1 block text-sm font-medium"></label>
             <span asp-validation-for="Email" class="text-red-500 text-sm"></span>
-            <input asp-for="Email" class="mt-1 block w-full rounded-md border-2 border-Secondary shadow-sm focus:outline-none sm:text-sm p-2" required name="Email"/>
+            <input asp-for="Email" class="border-2 mt-1 block w-full rounded-md border-Secondary p-2 shadow-sm focus:outline-none sm:text-sm" required name="Email"/>
         </div>
 
         <!-- Submit Button -->
         <div class="">
-            <input type="submit" value="Create" class="w-full bg-Primary font-bold border-2 rounded-[5px] py-2 cursor-pointer" />
+            <input type="submit" value="Create" class="border-2 w-full cursor-pointer rounded-[5px] bg-Primary py-2 font-bold" />
         </div>
     </form>
 </div>
