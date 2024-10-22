@@ -35,20 +35,40 @@
                 </div>
                 <ul class="px-[30px] text-left font-semibold uppercase text-ColorWhite">
                     <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
-                        <a asp-controller="home" asp-action="index">Home</a>
+                        <a asp-controller="home" asp-action="index">
+                            @if(User.Identity.IsAuthenticated){
+                                <span>
+                                    Dashboard
+
+                                </span>
+
+                            }
+                            else
+                            {
+                               <span>Home</span>
+                            }
+
+                        </a>
                     </li>
-                    <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
-                        <a asp-action="index" asp-controller="client">Clients</a>
-                    </li>
-                    <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
-                        <a asp-action="index" asp-controller="project">Project</a>
-                    </li>
-                    <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
-                        <a href="/TimeTracking">Time Tracking</a>
-                    </li>
-                    <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
-                        <a href="/Invoices">Invoices</a>
-                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+                        <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
+                            <a asp-action="index" asp-controller="client">Clients</a>
+                        </li>
+                        <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
+                            <a asp-action="index" asp-controller="project">Project</a>
+                        </li>
+                        <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
+                            <a href="/TimeTracking">Time Tracking</a>
+                        </li>
+                        <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
+                            <a href="/Invoices">Invoices</a>
+                        </li>
+                       
+                       
+                       }
+                   
                     <partial name="_LoginPartial" class="border-b-2 border-solid p-2" />
                 </ul>
             </div>

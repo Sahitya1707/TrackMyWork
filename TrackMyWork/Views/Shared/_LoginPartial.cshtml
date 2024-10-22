@@ -5,14 +5,20 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+        <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 uppercase ease-in hover:bg-Secondary hover:bg-opacity-30">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link text-dark uppercase">Logout</button>
+            </form>
+        </li>
+        <li class="border-b-2 durtion-50 my-[20px] w-[100%] text-wrap border-solid border-Primary p-2 normal-case ease-in hover:bg-Secondary hover:bg-opacity-30">
+            <!--
+            <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity?.Name!</a>
+
+
+            -->
+            @User.Identity?.Name
     </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
+
 }
 else
     {
