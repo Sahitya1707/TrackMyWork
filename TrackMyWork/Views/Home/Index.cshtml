@@ -21,12 +21,12 @@ text-shadow: 3px 3px 3px black;
         </h1>
         <p class="mb-8 text-xl" style="    text-shadow: 3px 3px 3px black;">Track your projects, manage clients, and streamline your workflow effortlessly.</p>
         <div class="flex items-center gap-x-6">
-            <a class="border-2 rounded-[5px] border-ColorWhite bg-Secondary px-6 py-3 text-ColorWhite shadow-lg transition duration-300 hover:bg-ColorWhite hover:text-Secondary hover:border-Secondary" asp-action="index" asp-controller="client">
+            <a class="border-2 rounded-[5px] border-ColorWhite bg-Secondary px-6 py-3 text-ColorWhite shadow-lg transition duration-300 hover:bg-ColorWhite hover:text-Secondary hover:border-Secondary"  href="@Url.Page("/Account/Register", new { area = "Identity" })">
                 Get Started
             </a>
             <div class="">
                
-                <a class="border-2 rounded-[5px] border-ColorBlack bg-Primary px-6 py-3 text-ColorBlack shadow-lg transition duration-300 hover:border-Primary hover:text-Primary hover:bg-ColorBlack" asp-action="index" asp-controller="client">
+                <a class="border-2 rounded-[5px] border-ColorBlack bg-Primary px-6 py-3 text-ColorBlack shadow-lg transition duration-300 hover:border-Primary hover:text-Primary hover:bg-ColorBlack" href="@Url.Page("/Account/Login", new { area = "Identity" })">
                  Already a user? <span class="font-bold">
                         Login
                  </span> 
@@ -59,7 +59,7 @@ text-shadow: 3px 3px 3px black;
              
 
                 <button class="mt-6">
-                    <a asp-action="index" asp-controller="project" class="border-2 rounded-[5px] border-Secondary bg-ColorWhite px-4 py-2 text-sm text-Secondary shadow-lg transition duration-300 hover:bg-Secondary hover:text-ColorWhite hover:border-ColorWhite">
+                    <a class="border-2 rounded-[5px] border-Secondary bg-ColorWhite px-4 py-2 text-sm text-Secondary shadow-lg transition duration-300 hover:bg-Secondary hover:text-ColorWhite hover:border-ColorWhite" href="@Url.Page("/Account/Register", new { area = "Identity" })">
                         Get Started
                     </a>
                     </button>
@@ -73,7 +73,7 @@ text-shadow: 3px 3px 3px black;
                     Track your working hours effortlessly and manage billing with accurate time records.
                 </p>
                 <button class="mt-6">
-                    <a asp-action="index" asp-controller="project" class="border-2 rounded-[5px] border-Secondary bg-ColorWhite px-4 py-2 text-sm text-Secondary shadow-lg transition duration-300 hover:bg-Secondary hover:text-ColorWhite hover:border-ColorWhite">
+                    <a   class="border-2 rounded-[5px] border-Secondary bg-ColorWhite px-4 py-2 text-sm text-Secondary shadow-lg transition duration-300 hover:bg-Secondary hover:text-ColorWhite hover:border-ColorWhite" href="@Url.Page("/Account/Register", new { area = "Identity" })">
                         Get Started
                     </a>
                 </button>
@@ -86,7 +86,7 @@ text-shadow: 3px 3px 3px black;
                     Create and send professional invoices, and keep track of your payments with our invoicing tool.
                 </p>
                 <button class="mt-6">
-                    <a asp-action="index" asp-controller="project" class="border-2 rounded-[5px] border-Secondary bg-ColorWhite px-4 py-2 text-sm text-Secondary shadow-lg transition duration-300 hover:bg-Secondary hover:text-ColorWhite hover:border-ColorWhite">
+                    <a   class="border-2 rounded-[5px] border-Secondary bg-ColorWhite px-4 py-2 text-sm text-Secondary shadow-lg transition duration-300 hover:bg-Secondary hover:text-ColorWhite hover:border-ColorWhite" href="@Url.Page("/Account/Register", new { area = "Identity" })">
                         Get Started
                     </a>
                 </button>
