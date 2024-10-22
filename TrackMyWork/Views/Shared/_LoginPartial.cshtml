@@ -10,13 +10,25 @@
                 <button type="submit" class="nav-link btn btn-link text-dark uppercase">Logout</button>
             </form>
         </li>
-        <li class="border-b-2 durtion-50 my-[20px] w-[100%] text-wrap border-solid border-Primary p-2 normal-case ease-in hover:bg-Secondary hover:bg-opacity-30">
+        <li class="durtion-50 my-[20px] flex w-[100%] items-center gap-x-2 overflow-hidden text-wrap p-2 normal-case ease-in">
             <!--
             <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity?.Name!</a>
 
 
             -->
-            @User.Identity?.Name
+            <p class="border-2 flex items-center justify-center rounded-full border-solid border-ColorWhite p-[2px] text-lg">
+                <span class="material-symbols-outlined"
+                style="
+font-size:inherit;
+"
+                >
+                    person
+                </span>
+            </p>
+            <span>
+                @User.Identity?.Name
+            </span>
+          
     </li>
 
 }
