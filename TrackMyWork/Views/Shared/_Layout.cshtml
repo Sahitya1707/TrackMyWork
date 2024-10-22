@@ -50,6 +50,7 @@
 
                         </a>
                     </li>
+                    <!--Showing the below item only after it is authenticated-->
                     @if (User.Identity.IsAuthenticated)
                     {
 
@@ -57,7 +58,7 @@
                             <a asp-action="index" asp-controller="client">Clients</a>
                         </li>
                         <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
-                            <a asp-action="index" asp-controller="project">Project</a>
+                            <a asp-action="index" asp-controller="project">My Projects</a>
                         </li>
                         <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
                             <a href="/TimeTracking">Time Tracking</a>
