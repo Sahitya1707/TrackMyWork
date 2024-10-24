@@ -9,42 +9,63 @@ background: linear-gradient(200deg, rgba(252,158,255,1) 1%, rgba(213,213,213,1) 
         @Model.Title
     </p>
 </div>
-<div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold">@Model.Title</h1>
-    <p>Description: @Model.Description</p>
-    <p>Start Date: @Model.StartDate.ToShortDateString()</p>
-    <p>Deadline: @Model.DeadlineDate.ToShortDateString()</p>
-    <p>
-        Urgency:
-        @if (Model.Urgency == 1)
-        {
-            <span class="text-red-600">High</span>
-        }
-        else if (Model.Urgency == 2)
-        {
-            <span class="text-blue-600">Medium</span>
-        }
-        else
-        {
-            <span class="text-yellow-500">Low</span>
-        }
-    </p>
-    <p>Status: @Model.Status</p>
+<div class="bg-gray-100 container mx-auto my-6 max-w-4xl rounded-lg p-6 shadow-lg">
+    <h1 class="mb-4 text-3xl font-extrabold">@Model.Title</h1>
+    <p class="mb-4 text-lg">Description: <span class="">@Model.Description</span></p>
 
-    @* Comments Section *@
-    <h3 class="mt-4 text-xl font-semibold">Messages</h3>
-    <form method="post" asp-action="AddComment">
-        <textarea name="comment" class="w-full rounded border px-2 py-1" placeholder="Leave a message"></textarea>
-        <button type="submit" class="text-white mt-2 rounded bg-Secondary px-4 py-2">Submit</button>
-    </form>
-
-    @* Display Comments *@
-    <div class="mt-4">
-        <h4 class="font-bold">All Messages</h4>
-        
+    <div class="grid-cols-2 mb-6 grid gap-4">
+        <p class="text-base">Start Date: <span class="text-[gray]">@Model.StartDate.ToShortDateString()</span></p>
+        <p class="text-base">Deadline: <span class="text-[gray]">@Model.DeadlineDate.ToShortDateString()</span></p>
+        <p class="text-base">Status:
+            @if (Model.Status == 1)
+            {
+                <span class="text-[blue]">Active</span>
+            }
+            else if (Model.Status == 2)
+            {
+                <span class="text-[green]">Hold</span>
+            }
+            else if (Model.Status == 3)
+            {
+                <span class="text-[grey]">Completed</span>
+            }
+            
+            
+            
+          
+        <p class="text-base">
+            Urgency:
+            @if (Model.Urgency == 1)
+            {
+                <span class="px-2 py-1 font-semibold text-[red]">High</span>
+            }
+            else if (Model.Urgency == 2)
+            {
+                <span class="px-2 py-1 font-semibold text-[blue]">Medium</span>
+            }
+            else
+            {
+                <span class="px-2 py-1 font-semibold text-[yellow]">Low</span>
+            }
+        </p>
     </div>
 
-    <div class="mt-6">
-        <a href="@Url.Action("Index")" class="border-2 bg-gray-400 text-white rounded px-4 py-2">Back to Projects</a>
+    @* Message Section *@
+    <div class="bg-white mt-8 rounded-lg p-6 shadow-md">
+        <h2 class="text-gray-800 mb-4 text-2xl font-bold">Messages</h2>
+
+        <form method="post" asp-action="AddComment">
+            <textarea name="comment" class="h-24 w-full rounded-lg border border-[gray] p-3 focus:outline-none focus:ring-2 focus:ring-Primary" placeholder="Leave a message"></textarea>
+            <button type="submit" class="text-white mt-3 w-full rounded-lg bg-Primary py-2 transition duration-300 hover:bg-White">Submit Message</button>
+        </form>
+
+        @* Display Comments *@
+        <div class="mt-6">
+            <h3 class="text-gray-700 text-xl font-semibold">All Messages</h3>
+        
+        </div>
+    </div>
+    <div class="mt-6 text-right">
+        <a href="@Url.Action("Index")" class="border-2 mt-4 rounded-md border-solid px-4 py-2 text-ColorBlack shadow transition duration-300 hover:bg-Secondary hover:text-ColorWhite">Back to Projects</a>
     </div>
 </div>
