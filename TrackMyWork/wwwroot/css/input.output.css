@@ -609,6 +609,10 @@ video {
   position: relative;
 }
 
+.sticky {
+  position: sticky;
+}
+
 .bottom-0 {
   bottom: 0px;
 }
@@ -621,12 +625,20 @@ video {
   right: 0px;
 }
 
+.right-\[0\.2rem\] {
+  right: 0.2rem;
+}
+
 .right-\[2\%\] {
   right: 2%;
 }
 
 .top-0 {
   top: 0px;
+}
+
+.top-\[0\.5rem\] {
+  top: 0.5rem;
 }
 
 .top-\[2\%\] {
@@ -648,11 +660,6 @@ video {
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
-}
-
-.my-4 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
 }
 
 .my-\[1rem\] {
@@ -770,10 +777,6 @@ video {
   height: 5rem;
 }
 
-.h-\[80vh\] {
-  height: 80vh;
-}
-
 .h-full {
   height: 100%;
 }
@@ -836,10 +839,6 @@ video {
 
 .max-w-lg {
   max-width: 32rem;
-}
-
-.max-w-md {
-  max-width: 28rem;
 }
 
 .translate-x-full {
@@ -960,6 +959,10 @@ video {
   border-radius: 0.75rem;
 }
 
+.rounded {
+  border-radius: 0.25rem;
+}
+
 .border {
   border-width: 1px;
 }
@@ -1021,6 +1024,11 @@ video {
   background-color: rgb(var(--color-secondary) / var(--tw-bg-opacity) );
 }
 
+.bg-\[aliceblue\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(240 248 255 / var(--tw-bg-opacity));
+}
+
 .bg-\[green\] {
   --tw-bg-opacity: 1;
   background-color: rgb(0 128 0 / var(--tw-bg-opacity));
@@ -1029,6 +1037,11 @@ video {
 .bg-\[red\] {
   --tw-bg-opacity: 1;
   background-color: rgb(255 0 0 / var(--tw-bg-opacity));
+}
+
+.bg-\[blue\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 255 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-50 {
@@ -1109,6 +1122,15 @@ video {
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.pb-2 {
+  padding-bottom: 0.5rem;
 }
 
 .text-left {
@@ -1215,6 +1237,16 @@ video {
   color: rgb(0 0 255 / var(--tw-text-opacity));
 }
 
+.text-\[green\] {
+  --tw-text-opacity: 1;
+  color: rgb(0 128 0 / var(--tw-text-opacity));
+}
+
+.text-\[grey\] {
+  --tw-text-opacity: 1;
+  color: rgb(128 128 128 / var(--tw-text-opacity));
+}
+
 .text-\[red\] {
   --tw-text-opacity: 1;
   color: rgb(255 0 0 / var(--tw-text-opacity));
@@ -1291,6 +1323,10 @@ video {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+* {
+  font-family: "Delius", serif;
+}
+
 /*Let's use a root color for the application so we can access the full control of color from here  
     Read here: (https://tailwindcss.com/docs/customizing-colors)*/
 
@@ -1313,16 +1349,6 @@ video {
 .hover\:border-Secondary:hover {
   --tw-border-opacity: 1;
   border-color: rgb(var(--color-secondary) / var(--tw-border-opacity) );
-}
-
-.hover\:border-\[green\]:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(0 128 0 / var(--tw-border-opacity));
-}
-
-.hover\:border-\[red\]:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(255 0 0 / var(--tw-border-opacity));
 }
 
 .hover\:bg-ColorBlack:hover {

@@ -19,7 +19,7 @@ namespace TrackMyWork.Controllers
             // need to add clients or get the clients from the db in order to loop/use it in index.cshtml view
 
             var projects = await _context.Projects.Include(p => p.Client).ToListAsync();
-
+            Console.WriteLine(projects);
 
             return View(projects);
         }
@@ -33,7 +33,7 @@ namespace TrackMyWork.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title, Description, ClientId, StartDate, DaysToComplete, Urgency")]Project project)
+        public async Task<IActionResult> Create([Bind("Title, Description, ClientId, StartDate, Urgency, DeadlineDate, Status")]Project project)
         {
        
 
@@ -63,7 +63,7 @@ namespace TrackMyWork.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Title, Description, ClientId, StartDate, DaysToComplete, Urgency")] Project project)
+        public async Task<IActionResult> Edit(int id, [Bind("Title, Description, ClientId, StartDate, DeadlineDate, Urgency, Status")] Project project)
         {
             // checking if we goes inside if function or not
             Console.WriteLine("this is outside");
@@ -91,7 +91,7 @@ namespace TrackMyWork.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int? id)
         {
-            Console.WriteLine("We are inside here.");
+          
             if (id == null)
             {
                 return NotFound();
@@ -109,6 +109,17 @@ namespace TrackMyWork.Controllers
             }
             return RedirectToAction(nameof(Index));
 
+        }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var project = await _context.Projects.FirstOrDefaultAsync(m => m.ProjectId == id);
+
+            return View(project);
         }
     }
 }
