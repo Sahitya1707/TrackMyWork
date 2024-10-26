@@ -13,17 +13,20 @@ public class Message
     public DateTime SentDate { get; set; }  // Date the message was sent
 
     // we will use user id and project id for the foreign key in order to use that 
-        [Display(Name = "User")]  
-        public int UserId {  get; set; }
 
-        public User? User { get; set; }
+    [Required]
+    public int ProjectId { get; set; }
+    public Project Project { get; set; } // we need project so that message can related to specific project.
 
 
-        [Display(Name = "Client")]
-        public string ClientId { get; set; }
-        public Client? Client { get; set; }
+    [Required]
+    public int SenderId { get; set; }
+    public User Sender { get; set; }  // Represents either the client or freelancer
 
-  
+    // Status to check if the message has been read
+    public bool IsRead { get; set; } = false;
+
+
 
 
 
