@@ -3,14 +3,9 @@
 @{
     ViewData["Title"] = Model.Title;
 }
-<div class="border-b-2 relative flex h-[25rem] w-full items-center justify-center border-solid bg-Primary bg-cover bg-no-repeat" style="background: rgb(252,158,255);
-background: linear-gradient(200deg, rgba(252,158,255,1) 1%, rgba(213,213,213,1) 61%, rgba(144,230,255,1) 100%);">
-    <p class="relative mb-6 text-center text-5xl font-bold uppercase tracking-widest text-Primary" style="-webkit-text-stroke:1px black;">
-        @Model.Title
-    </p>
-</div>
-<div class="bg-gray-100 container mx-auto my-6 max-w-4xl rounded-lg p-6 shadow-lg">
-    <h1 class="mb-4 text-3xl font-extrabold">@Model.Title</h1>
+
+<div class="bg-gray-100 container mx-auto my-[1rem] max-w-4xl rounded-lg p-6 shadow-lg">
+    <h1 class="mb-4 text-3xl font-extrabold capitalize">@Model.Title</h1>
     <p class="mb-4 text-lg">Description: <span class="">@Model.Description</span></p>
 
     <div class="grid-cols-2 mb-6 grid gap-4">
@@ -19,15 +14,15 @@ background: linear-gradient(200deg, rgba(252,158,255,1) 1%, rgba(213,213,213,1) 
         <p class="text-base">Status:
             @if (Model.Status == 1)
             {
-                <span class="text-[blue]">Active</span>
+                <span class="font-semibold text-[blue]">Active</span>
             }
             else if (Model.Status == 2)
             {
-                <span class="text-[green]">Hold</span>
+                <span class="font-semibold text-[green]">Hold</span>
             }
             else if (Model.Status == 3)
             {
-                <span class="text-[grey]">Completed</span>
+                <span class="font-semibold text-[grey]">Completed</span>
             }
             
             
@@ -56,16 +51,16 @@ background: linear-gradient(200deg, rgba(252,158,255,1) 1%, rgba(213,213,213,1) 
 
         <form method="post" asp-action="AddComment">
             <textarea name="comment" class="h-24 w-full rounded-lg border border-[gray] p-3 focus:outline-none focus:ring-2 focus:ring-Primary" placeholder="Leave a message"></textarea>
-            <button type="submit" class="text-white mt-3 w-full rounded-lg bg-Primary py-2 transition duration-300 hover:bg-White">Submit Message</button>
+            <button type="submit" class="text-white mt-3 w-full rounded-lg bg-Primary py-2 font-semibold transition duration-300 hover:bg-ColorWhite">Submit Message</button>
         </form>
 
-        @* Display Comments *@
+        @* Display Message *@
         <div class="mt-6">
             <h3 class="text-gray-700 text-xl font-semibold">All Messages</h3>
         
         </div>
     </div>
     <div class="mt-6 text-right">
-        <a href="@Url.Action("Index")" class="border-2 mt-4 rounded-md border-solid px-4 py-2 text-ColorBlack shadow transition duration-300 hover:bg-Secondary hover:text-ColorWhite">Back to Projects</a>
+        <a href="@Url.Action("Index")" class="border-2 mt-4 rounded-md border-solid px-4 py-2 text-ColorBlack shadow transition duration-300 hover:bg-Secondary hover:text-ColorWhite hover:border-2 hover:border-solid hover:border-ColorBlack">Back to Projects</a>
     </div>
 </div>
