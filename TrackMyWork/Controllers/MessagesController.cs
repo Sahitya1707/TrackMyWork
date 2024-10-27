@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TrackMyWork.Data;
+using TrackMyWork.Models;
+using Microsoft.AspNetCore.Identity;
+
+using System.Security.Claims;
 
 namespace TrackMyWork.Controllers
 {
@@ -22,6 +26,7 @@ namespace TrackMyWork.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Messages.Include(m => m.Project).Include(m => m.Sender);
+            Console.WriteLine(User.Identity?.Name);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -49,7 +54,7 @@ namespace TrackMyWork.Controllers
         public IActionResult Create()
         {
             ViewData["ProjectId"] = new SelectList(_context.Projects, "ProjectId", "Description");
-            //ViewData["SenderId"] = new SelectList(_context.Set<User>(), "UserId", "Email");
+            ViewData["SenderEmail"] = User.Identity?.Name;
             return View();
         }
 
@@ -62,12 +67,13 @@ namespace TrackMyWork.Controllers
         {
             if (ModelState.IsValid)
             {
+                message.SenderMail = User.Identity?.Name; // as the Sendermail is static so getting is directly through user.identity
                 _context.Add(message);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjectId"] = new SelectList(_context.Projects, "ProjectId", "Description", message.ProjectId);
-            //ViewData["SenderId"] = new SelectList(_context.Set<User>(), "UserId", "Email", message.SenderId);
+            ViewData["ProjectId"] = new SelectList(_context.Projects, "ProjectId", "Title", message.ProjectId);
+        
             return View(message);
         }
 
@@ -85,7 +91,7 @@ namespace TrackMyWork.Controllers
                 return NotFound();
             }
             ViewData["ProjectId"] = new SelectList(_context.Projects, "ProjectId", "Description", message.ProjectId);
-            //ViewData["SenderId"] = new SelectList(_context.Set<User>(), "UserId", "Email", message.SenderId);
+            ViewData["SenderId"] = new SelectList(_context.Set<User>(), "UserId", "Email", message.SenderId);
             return View(message);
         }
 
@@ -122,7 +128,7 @@ namespace TrackMyWork.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ProjectId"] = new SelectList(_context.Projects, "ProjectId", "Description", message.ProjectId);
-            //ViewData["SenderId"] = new SelectList(_context.Set<User>(), "UserId", "Email", message.SenderId);
+            ViewData["SenderId"] = new SelectList(_context.Set<User>(), "UserId", "Email", message.SenderId);
             return View(message);
         }
 

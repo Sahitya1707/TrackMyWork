@@ -21,7 +21,10 @@ public class Message
 
     [Required]
     public int SenderId { get; set; }
-    public User Sender { get; set; }  // Represents either the client or freelancer
+    public User Sender { get; set; }
+
+    [Required]
+    public String SenderMail { get; set; } // this is to get/show the user email in messaging system.
 
     // Status to check if the message has been read
     public bool IsRead { get; set; } = false;
