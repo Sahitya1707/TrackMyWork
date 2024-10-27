@@ -53,7 +53,7 @@ namespace TrackMyWork.Controllers
         // GET: Messages/Create
         public IActionResult Create()
         {
-            ViewData["ProjectId"] = new SelectList(_context.Projects, "ProjectId", "Description");
+            ViewData["ProjectId"] = new SelectList(_context.Projects, "ProjectId", "Title");
             ViewData["SenderEmail"] = User.Identity?.Name;
             return View();
         }
