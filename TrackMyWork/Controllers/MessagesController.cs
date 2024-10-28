@@ -25,7 +25,7 @@ namespace TrackMyWork.Controllers
         // GET: Messages
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Messages.Include(m => m.Project).Include(m => m.Sender);
+            var applicationDbContext = _context.Messages.Include(m => m.Project);
             Console.WriteLine(User.Identity?.Name);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -40,7 +40,7 @@ namespace TrackMyWork.Controllers
 
             var message = await _context.Messages
                 .Include(m => m.Project)
-                .Include(m => m.Sender)
+                //.Include(m => m.Sender)
                 .FirstOrDefaultAsync(m => m.MessageId == id);
             if (message == null)
             {
@@ -55,6 +55,7 @@ namespace TrackMyWork.Controllers
         {
             ViewData["ProjectId"] = new SelectList(_context.Projects, "ProjectId", "Title");
             ViewData["SenderEmail"] = User.Identity?.Name;
+        
             return View();
         }
 
@@ -63,10 +64,26 @@ namespace TrackMyWork.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MessageId,Content,SentDate,ProjectId,SenderId,IsRead")] Message message)
+        public async Task<IActionResult> Create([Bind("MessageId,Content,ProjectId,SenderMail,IsRead, SentDate")] Message message)
         {
+            Console.WriteLine("I am outise");
+// see the error 
+            if (!ModelState.IsValid)
+            {
+                foreach (var modelState in ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        Console.WriteLine(error.ErrorMessage);
+                    }
+                }
+            }
+            Console.WriteLine(User.Identity?.Name);
+
             if (ModelState.IsValid)
             {
+               Console.WriteLine("I am not outise");
+                message.SentDate = DateTime.Now;
                 message.SenderMail = User.Identity?.Name; // as the Sendermail is static so getting is directly through user.identity
                 _context.Add(message);
                 await _context.SaveChangesAsync();
@@ -91,7 +108,7 @@ namespace TrackMyWork.Controllers
                 return NotFound();
             }
             ViewData["ProjectId"] = new SelectList(_context.Projects, "ProjectId", "Description", message.ProjectId);
-            ViewData["SenderId"] = new SelectList(_context.Set<User>(), "UserId", "Email", message.SenderId);
+            //ViewData["SenderId"] = new SelectList(_context.Set<User>(), "UserId", "Email", message.SenderId);
             return View(message);
         }
 
@@ -128,7 +145,7 @@ namespace TrackMyWork.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ProjectId"] = new SelectList(_context.Projects, "ProjectId", "Description", message.ProjectId);
-            ViewData["SenderId"] = new SelectList(_context.Set<User>(), "UserId", "Email", message.SenderId);
+            //ViewData["SenderId"] = new SelectList(_context.Set<User>(), "UserId", "Email", message.SenderId);
             return View(message);
         }
 
@@ -142,7 +159,7 @@ namespace TrackMyWork.Controllers
 
             var message = await _context.Messages
                 .Include(m => m.Project)
-                .Include(m => m.Sender)
+                //.Include(m => m.Sender)
                 .FirstOrDefaultAsync(m => m.MessageId == id);
             if (message == null)
             {
