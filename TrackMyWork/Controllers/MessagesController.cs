@@ -25,9 +25,13 @@ namespace TrackMyWork.Controllers
         // GET: Messages
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Messages.Include(m => m.Project);
-            Console.WriteLine(User.Identity?.Name);
-            return View(await applicationDbContext.ToListAsync());
+
+            var messages = await _context.Messages
+        .Include(m => m.Project)
+        .OrderByDescending(m => m.SentDate)
+        .ToListAsync();
+
+            return View(messages);
         }
 
         // GET: Messages/Details/5
