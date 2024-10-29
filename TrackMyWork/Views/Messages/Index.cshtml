@@ -5,45 +5,47 @@
 }
 
 
+<div class="ml-4 mr-4 mt-[2rem] flex justify-end">
+    <p>
+        <a asp-action="Create" class="border-2 mt-4 rounded-md border-solid px-4 py-2 text-ColorBlack shadow transition duration-300 hover:bg-Secondary hover:text-ColorWhite">Send New Message</a>
+    </p>
 
-<p>
-    <a asp-action="Create" asp-route-projectId="@ViewData["ProjectId"]">Create New</a>
-</p>
-<table class="table">
-    <thead>
+</div>
+
+<table class="divide-gray-200 border-2 mx-auto w-[80%] divide-y border-solid">
+    <thead class="bg-gray-50">
         <tr>
-            <th>
+            <th class="text-gray-500 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
                 @Html.DisplayNameFor(model => model.Content)
             </th>
-            <th>
+            <th class="text-gray-500 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
                 @Html.DisplayNameFor(model => model.SentDate)
             </th>
-            <th>
+            <th class="text-gray-500 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
                 @Html.DisplayNameFor(model => model.Project)
             </th>
-            <th>
-              @Html.DisplayNameFor(model=> model.SenderMail)
+            <th class="text-gray-500 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+                @Html.DisplayNameFor(model => model.SenderMail)
             </th>
-          
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SentDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Project.Description)
-            </td>
-            <td>
-               @Html.DisplayFor(modelItem=>item.SenderMail)
-            </td>
-           
-        </tr>
-}
+    <tbody class="bg-white divide-gray-200 divide-y">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="whitespace-nowrap px-6 py-4">
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td class="whitespace-nowrap px-6 py-4">
+                    @Html.DisplayFor(modelItem => item.SentDate)
+                </td>
+                <td class="whitespace-nowrap px-6 py-4">
+                    @Html.DisplayFor(modelItem => item.Project.Description)
+                </td>
+                <td class="whitespace-nowrap px-6 py-4">
+                    @Html.DisplayFor(modelItem => item.SenderMail)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
