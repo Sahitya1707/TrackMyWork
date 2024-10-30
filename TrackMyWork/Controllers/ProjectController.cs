@@ -91,7 +91,7 @@ namespace TrackMyWork.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int? id)
         {
-          
+           
             if (id == null)
             {
                 return NotFound();
@@ -122,5 +122,42 @@ namespace TrackMyWork.Controllers
          .FirstOrDefaultAsync(m => m.ProjectId == id);
             return View(project);
         }
+        
+        // adding submit message action
+        public IActionResult SendMessage()
+        {
+            // need to add project id and sender email
+            ViewData["SenderEmail"] = User.Identity?.Name;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> SendMessage([Bind("MessageId,Content,ProjectId,SenderMail,IsRead, SentDate")]Message message)
+        {
+            // below code to know what's the error(what's require)
+            if (!ModelState.IsValid)
+            {
+                foreach (var modelState in ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        Console.WriteLine(error.ErrorMessage);
+                    }
+                }
+                if (ModelState.IsValid)
+                {
+                    Console.WriteLine("I am not outise");
+                    message.SentDate = DateTime.Now;
+                    message.SenderMail = User.Identity?.Name; // as the Sendermail is static so getting is directly through user.identity
+                    _context.Add(message);
+                    await _context.SaveChangesAsync();
+                    //return RedirectToAction(nameof(Index));
+
+                    return View(message);
+                }
+            }
+        }
+
     }
 }

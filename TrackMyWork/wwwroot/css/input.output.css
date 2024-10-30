@@ -1076,6 +1076,11 @@ video {
   background-color: rgb(var(--color-secondary) / var(--tw-bg-opacity) );
 }
 
+.bg-\[\#eee\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(238 238 238 / var(--tw-bg-opacity));
+}
+
 .bg-\[aliceblue\] {
   --tw-bg-opacity: 1;
   background-color: rgb(240 248 255 / var(--tw-bg-opacity));
@@ -1094,16 +1099,6 @@ video {
 .bg-\[red\] {
   --tw-bg-opacity: 1;
   background-color: rgb(255 0 0 / var(--tw-bg-opacity));
-}
-
-.bg-\[lightgray\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(211 211 211 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#eee\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(238 238 238 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-50 {
@@ -1142,16 +1137,16 @@ video {
   padding: 1.5rem;
 }
 
+.p-\[1rem\] {
+  padding: 1rem;
+}
+
 .p-\[2px\] {
   padding: 2px;
 }
 
 .p-\[2rem\] {
   padding: 2rem;
-}
-
-.p-\[1rem\] {
-  padding: 1rem;
 }
 
 .px-2 {
@@ -1424,6 +1419,11 @@ video {
 /*Let's use a root color for the application so we can access the full control of color from here  
     Read here: (https://tailwindcss.com/docs/customizing-colors)*/
 
+.display-hidden{
+  display:none;
+  transition:0.2s ease-in-out;
+}
+
 .hover\:scale-105:hover {
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
@@ -1471,11 +1471,6 @@ video {
 .hover\:bg-Secondary:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-secondary) / var(--tw-bg-opacity) );
-}
-
-.hover\:bg-\[darkgray\]:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(169 169 169 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-\[\#ccc\]:hover {
