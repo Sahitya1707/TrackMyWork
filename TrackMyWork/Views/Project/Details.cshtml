@@ -51,16 +51,35 @@
 
         <form method="post" asp-action="AddComment">
             <textarea name="comment" class="h-24 w-full rounded-lg border border-[gray] p-3 focus:outline-none focus:ring-2 focus:ring-Primary" placeholder="Leave a message"></textarea>
-            <button type="submit" class="text-white mt-3 w-full rounded-lg bg-Primary py-2 font-semibold transition duration-300 hover:bg-ColorWhite">Submit Message</button>
+            <button type="submit" class="text-white mt-3 w-full rounded-lg bg-Primary py-2 font-semibold transition duration-300 hover:bg-ColorWhite hover:border-2 hover:border-solid hover:border-ColorBlack">Submit Message</button>
         </form>
 
-        @* Display Message *@
-        <div class="mt-6">
-            <h3 class="text-gray-700 text-xl font-semibold">All Messages</h3>
         
+      
+            <!--trying to make it as accordian-->
+            <button id="accordian" class="text-gray-700 mt-6 rounded bg-[#eee] p-[1rem] text-xl font-semibold shadow-lg hover:bg-[#ccc]">All Messages</button>
+        
+            <div class="hidden" id="panel">
+
+                @if (Model.Messages != null && Model.Messages.Any())
+                {
+                    @foreach (var message in Model.Messages.OrderByDescending(m => m.SentDate))
+                    {
+                        <div class="bg-white mb-4 rounded p-4 shadow">
+                            <p class="font-semibold">@message.SenderMail</p>
+                            <p>@message.Content</p>
+                            <p class="text-gray-500 text-sm">@message.SentDate.ToString("g")</p>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>No messages for this project.</p>
+                }
+            </div>
         </div>
     </div>
     <div class="mt-6 text-right">
         <a href="@Url.Action("Index")" class="border-2 mt-4 rounded-md border-solid px-4 py-2 text-ColorBlack shadow transition duration-300 hover:bg-Secondary hover:text-ColorWhite hover:border-2 hover:border-solid hover:border-ColorBlack">Back to Projects</a>
-    </div>
+   
 </div>

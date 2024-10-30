@@ -117,8 +117,9 @@ namespace TrackMyWork.Controllers
             {
                 return NotFound();
             }
-            var project = await _context.Projects.FirstOrDefaultAsync(m => m.ProjectId == id);
-
+            var project = await _context.Projects
+         .Include(p => p.Messages)
+         .FirstOrDefaultAsync(m => m.ProjectId == id);
             return View(project);
         }
     }
