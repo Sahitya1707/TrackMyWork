@@ -1,0 +1,96 @@
+﻿@model TrackMyWork.Models.ProjectDetailViewModel
+
+@{
+    ViewData["Title"] = Model.Project.Title;
+}
+
+<div class="bg-gray-100 container mx-auto my-[1rem] max-w-4xl rounded-lg p-6 shadow-lg">
+    <div class="flex items-center justify-between">
+        <h1 class="mb-4 text-3xl font-extrabold capitalize">@Model.Project.Title</h1>
+        <p class="font-bold text-Secondary">#@Model.Project.ProjectId</p>
+    </div>
+
+    <p class="mb-4 text-lg">Description: <span class="">@Model.Project.Description</span></p>
+
+    <div class="grid-cols-2 mb-6 grid gap-4">
+        <p class="text-base">Start Date: <span class="text-[gray]">@Model.Project.StartDate.ToShortDateString()</span></p>
+        <p class="text-base">Deadline: <span class="text-[gray]">@Model.Project.DeadlineDate.ToShortDateString()</span></p>
+        <p class="text-base">
+            Status:
+            @if (Model.Project.Status == 1)
+            {
+                <span class="font-semibold text-[blue]">Active</span>
+            }
+            else if (Model.Project.Status == 2)
+            {
+                <span class="font-semibold text-[green]">Hold</span>
+            }
+            else if (Model.Project.Status == 3)
+            {
+                <span class="font-semibold text-[grey]">Completed</span>
+            }
+        </p>
+        <p class="text-base">
+            Urgency:
+            @if (Model.Project.Urgency == 1)
+            {
+                <span class="px-2 py-1 font-semibold text-[red]">High</span>
+            }
+            else if (Model.Project.Urgency == 2)
+            {
+                <span class="px-2 py-1 font-semibold text-[blue]">Medium</span>
+            }
+            else
+            {
+                <span class="px-2 py-1 font-semibold text-[yellow]">Low</span>
+            }
+        </p>
+    </div>
+
+    <!-- Message Submission Form -->
+    <div class="bg-white mt-8 rounded-lg p-6 shadow-md">
+        <h2 class="text-gray-800 mb-4 text-2xl font-bold">Messages</h2>
+        <form method="post" asp-action="SendMessage">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Project.ProjectId" name="projectId" />
+            <textarea asp-for="Message.Content" class="h-24 w-full rounded-lg border border-[gray] p-3 focus:outline-none focus:ring-2 focus:ring-Primary" placeholder="Leave a message"></textarea>
+            <button type="submit" class="text-white border-2 mt-3 w-full rounded-lg border-solid border-ColorBlack bg-Primary py-2 font-semibold transition duration-300 hover:bg-ColorWhite">Submit Message</button>
+           <!--
+               Sending sender email throught input element of hidden type
+           -->
+            <input type="hidden" asp-for="Message.SenderMail" value="@User.Identity?.Name" />
+
+            <input type="hidden" asp-for="Message.SentDate" value="@DateTime.Now"/>
+            <input type="hidden" asp-for="Message.ProjectId" value="@Model.Project.ProjectId" />
+
+
+        </form>
+
+        <!-- Accordion for Messages -->
+        <button id="accordian" class="text-gray-700 mt-6 w-full rounded bg-[#eee] p-[1rem] text-xl font-semibold shadow-lg hover:bg-[#ccc]">All Messages</button>
+        <div id="panel" class="display-hidden">
+            @if (Model.Project.Messages != null && Model.Project.Messages.Any())
+            {
+                @foreach (var message in Model.Project.Messages.OrderByDescending(m => m.SentDate))
+                {
+                    <div class="bg-white my-4 rounded p-4 shadow">
+                        <p class="font-semibold">@message.Content</p>
+                        <p>@message.SenderMail</p>
+                        <p class="text-gray-500 text-xs">@message.SentDate</p>
+                    </div>
+                } 
+            }
+            else
+            {
+                <p class="mt-2 rounded p-2 shadow">No messages for this project.</p>
+            }
+        </div>
+    </div>
+
+
+</div>
+
+
+<div class="mt-2 text-right">
+    <a href="@Url.Action("Index")" class="border-2 mt-4 rounded-md border-solid px-4 py-2 text-ColorBlack shadow transition duration-300 hover:bg-Secondary hover:text-ColorWhite hover:border-2 hover:border-solid hover:border-ColorBlack">Back to Projects</a>
+</div>

@@ -141,9 +141,16 @@ namespace TrackMyWork.Controllers
 
         public async Task<IActionResult> SendMessage([Bind("MessageId,Content,ProjectId,SenderMail,IsRead, SentDate")]Message message)
         {
-           
+            Console.WriteLine(message.MessageId);
+            Console.WriteLine(message.SenderMail);
+            Console.WriteLine(message.SentDate);
+            Console.WriteLine(message.ProjectId);
+            Console.WriteLine(message.Content);
+            Console.WriteLine("I am outside of model valid state");
+
             if (!ModelState.IsValid)
             {
+              
                 foreach (var modelState in ModelState.Values)
                 {
                     foreach (var error in modelState.Errors)
@@ -151,8 +158,10 @@ namespace TrackMyWork.Controllers
                         Console.WriteLine(error.ErrorMessage);
                     }
                 }
+            }
                 if (ModelState.IsValid)
                 {
+                    Console.WriteLine("I am inside of model valid state");
                     Console.WriteLine(message.MessageId);
                     Console.WriteLine(message.SenderMail);
                     Console.WriteLine(message.SentDate);
@@ -163,15 +172,15 @@ namespace TrackMyWork.Controllers
                     message.SenderMail = User.Identity?.Name; // as the Sendermail is static so getting is directly through user.identity
                     _context.Add(message);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Project", new { id = 6 });
 
-                }
-              
             }
             // redirecting the form submission to same page , 
             // https://aboutdev.wordpress.com/2013/01/22/asp-net-mvc-3-redirect-query-string-with-id/
-            return RedirectToAction("Details", "Project", new { id = 6 });
+            return RedirectToAction("Details", "Project", new { id = message.ProjectId });
+        }
+          
         }
 
     }
-}
+
