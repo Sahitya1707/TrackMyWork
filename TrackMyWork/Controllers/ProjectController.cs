@@ -172,7 +172,7 @@ namespace TrackMyWork.Controllers
                     message.SenderMail = User.Identity?.Name; // as the Sendermail is static so getting is directly through user.identity
                     _context.Add(message);
                     await _context.SaveChangesAsync();
-                return RedirectToAction("Details", "Project", new { id = 6 });
+                return RedirectToAction("Details", "Project", new { id = message.ProjectId });
 
             }
             // redirecting the form submission to same page , 
