@@ -115,13 +115,23 @@ namespace TrackMyWork.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
+            { 
                 return NotFound();
             }
             var project = await _context.Projects
          .Include(p => p.Messages)
          .FirstOrDefaultAsync(m => m.ProjectId == id);
-            return View(project);
+
+            // using view model as I want to send message from detail view so it will be the case of using both project model and message model at once.
+            // https://education.launchcode.org/csharp-web-dev-curriculum/viewmodels/reading/viewmodels-intro/index.html
+            // https://stackoverflow.com/questions/11064316/what-is-viewmodel-in-mvc 
+            // ------------------------
+            var viewModel = new ProjectDetailViewModel
+            {
+                Project = project,
+                Message = new Message() // Placeholder message for the form
+            };
+            return View(viewModel);
         }
         
         // adding submit message action
@@ -131,7 +141,7 @@ namespace TrackMyWork.Controllers
 
         public async Task<IActionResult> SendMessage([Bind("MessageId,Content,ProjectId,SenderMail,IsRead, SentDate")]Message message)
         {
-         
+           
             if (!ModelState.IsValid)
             {
                 foreach (var modelState in ModelState.Values)
@@ -143,7 +153,12 @@ namespace TrackMyWork.Controllers
                 }
                 if (ModelState.IsValid)
                 {
-                    Console.WriteLine("I am not outise");
+                    Console.WriteLine(message.MessageId);
+                    Console.WriteLine(message.SenderMail);
+                    Console.WriteLine(message.SentDate);
+                    Console.WriteLine(message.Content);
+                    Console.WriteLine(message.ProjectId);
+                    Console.WriteLine("I am not outside");
                     message.SentDate = DateTime.Now;
                     message.SenderMail = User.Identity?.Name; // as the Sendermail is static so getting is directly through user.identity
                     _context.Add(message);
