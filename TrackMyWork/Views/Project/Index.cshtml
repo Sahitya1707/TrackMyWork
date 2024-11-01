@@ -4,7 +4,16 @@
 @{
     ViewData["Title"] = "My Projects";
     // sort projects by urgency and then by name
-    var SortedProjects = Model.OrderBy(p => p.Urgency).ThenBy(p => p.Title).ToList();
+    var SortedProjects= Model;
+    if (User.IsInRole("Freelancer"))
+    {
+      SortedProjects= Model.OrderBy(p => p.Urgency).ThenBy(p => p.Title).ToList();
+    }
+    else if (User.IsInRole("Client"))
+    {
+        SortedProjects = Model.Where(p => p.Client.Email == User.Identity.Name).OrderBy(p => p.Urgency).ThenBy(p => p.Title).ToList();
+    }
+
 
 
 }
