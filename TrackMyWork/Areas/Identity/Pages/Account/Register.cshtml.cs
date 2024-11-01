@@ -17,7 +17,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using TrackMyWork.Data;
 
 namespace TrackMyWork.Areas.Identity.Pages.Account
 {
@@ -29,13 +31,15 @@ namespace TrackMyWork.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext _context;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -43,6 +47,8 @@ namespace TrackMyWork.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
+
         }
 
         /// <summary>
@@ -108,6 +114,9 @@ namespace TrackMyWork.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            // my approach for the handling client, how to determine if it's client or not??
+            // suppose user created client with email client@client.ca then the client should login with same email in order to look into his/her project. 
+            // while registering I will check if that client email is already available in the client.email model if yeah he will get the client level access.
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
@@ -120,6 +129,14 @@ namespace TrackMyWork.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    var client = await _context.Clients.FirstOrDefaultAsync(c => c.Email == Input.Email);
+                  
+                    Console.WriteLine(Input.Email);
+                    if (client != null) 
+                    {
+                        // Assign the "Client" role
+                        await _userManager.AddToRoleAsync(user, "Client"); 
+                    }
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
