@@ -44,7 +44,7 @@ namespace TrackMyWork.Controllers
 
                 if (ModelState.IsValid)
             {
-                Console.WriteLine("Form submitted.");
+    
 
                 // Save the project to the database
                 _context.Projects.Add(project);
@@ -58,11 +58,12 @@ namespace TrackMyWork.Controllers
         }
 
         [Authorize(Roles = "Freelancer")]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int?id)
         {
             var project = await _context.Projects.FindAsync(id);
             if (project== null)
             {
+                Console.WriteLine("123 sahitya");
                 return NotFound();
             }
             ViewBag.Clients = await _context.Clients.ToListAsync();
@@ -70,21 +71,32 @@ namespace TrackMyWork.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Title, Description, ClientId, StartDate, DeadlineDate, Urgency, Status")] Project project)
+        public async Task<IActionResult> Edit(int id, [Bind("ProjectId,Title, Description, ClientId, StartDate, DeadlineDate, Urgency, Status")] Project project)
         {
             // checking if we goes inside if function or not
+            Console.WriteLine(id);
+            Console.WriteLine(project.ProjectId);                           
             Console.WriteLine("this is outside");
-
-            if (id != project.ProjectId)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                foreach (var modelState in ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        Console.WriteLine(error.ErrorMessage);
+                    }
+                }
             }
+            //if (id != project.ProjectId)
+            //{
+            //    return NotFound();
+            //}
 
             if (ModelState.IsValid)
             {
                 Console.WriteLine("Going inside");
 
-                _context.Update(project); // Update the client in the database
+                _context.Update(project); 
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index)); // Redirect to Index view
 
