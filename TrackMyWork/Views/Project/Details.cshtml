@@ -54,7 +54,7 @@
             @Html.AntiForgeryToken()
             <input type="hidden" asp-for="Project.ProjectId" name="projectId" />
             <textarea asp-for="Message.Content" class="h-24 w-full rounded-lg border border-[gray] p-3 focus:outline-none focus:ring-2 focus:ring-Primary" placeholder="Leave a message"></textarea>
-            <button type="submit" class="text-white border-2 mt-3 w-full rounded-lg border-solid border-ColorBlack bg-Primary py-2 font-semibold transition duration-300 hover:bg-ColorWhite">Submit Message</button>
+            <button type="submit" class="text-white border-2 mt-3 w-full rounded-lg border-solid border-ColorBlack bg-Primary py-2 font-semibold transition duration-300 hover:bg-ColorWhite">Send Message</button>
            <!--
                Sending sender email throught input element of hidden type
            -->
@@ -73,7 +73,9 @@
             {
                 @foreach (var message in Model.Project.Messages.OrderByDescending(m => m.SentDate))
                 {
-                    <div class="bg-white my-4 rounded p-4 shadow">
+                    <div class="my-4 rounded p-4 shadow @(message.SenderMail == User.Identity.Name ? "text-right" : "text-left")"
+                         style="background-color: @(message.SenderMail == User.Identity.Name ? "lightblue" : "white");">
+
                         <p class="font-semibold">@message.Content</p>
                         <p>@message.SenderMail</p>
                         <p class="text-gray-500 text-xs">@message.SentDate</p>

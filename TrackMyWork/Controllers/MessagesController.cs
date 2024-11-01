@@ -10,9 +10,11 @@ using TrackMyWork.Models;
 using Microsoft.AspNetCore.Identity;
 
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TrackMyWork.Controllers
 {
+    [Authorize]
     public class MessagesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,18 +24,34 @@ namespace TrackMyWork.Controllers
             _context = context;
         }
 
-        // GET: Messages
+      
         public async Task<IActionResult> Index()
         {
+            
+            var currentUserEmail = User.Identity.Name;
 
-            var messages = await _context.Messages
-        .Include(m => m.Project)
-        .OrderByDescending(m => m.SentDate)
-        .ToListAsync();
+           
+            var allMessages = await _context.Messages
+                .Include(m => m.Project) // Include related projects
+                .OrderByDescending(m => m.SentDate) 
+                .ToListAsync();
 
-            return View(messages);
+            // Filter messages based on user role
+            IEnumerable<Message> filteredMessages;
+
+            if (User.IsInRole("Client"))
+            {
+              // filtering so that client can see only their messge
+                filteredMessages = allMessages.Where(m => m.SenderMail == currentUserEmail);
+            }
+            else
+            {
+               
+                filteredMessages = allMessages;
+            }
+
+            return View(filteredMessages); 
         }
-
         // GET: Messages/Details/5
         public async Task<IActionResult> Details(int? id)
         {
