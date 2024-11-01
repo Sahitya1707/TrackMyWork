@@ -1,58 +1,115 @@
 ﻿@model IEnumerable<TrackMyWork.Models.Project>
 
+
 @{
     ViewData["Title"] = "My Projects";
+    // sort projects by urgency and then by name
+    var SortedProjects= Model;
+    if (User.IsInRole("Freelancer"))
+    {
+      SortedProjects= Model.OrderBy(p => p.Urgency).ThenBy(p => p.Title).ToList();
+    }
+    else if (User.IsInRole("Client"))
+    {
+        SortedProjects = Model.Where(p => p.Client.Email == User.Identity.Name).OrderBy(p => p.Urgency).ThenBy(p => p.Title).ToList();
+    }
+
+
+
 }
 
-<h2 class="text-3xl font-bold text-center mb-6">My Project</h2>
-
-<div class="container mx-auto px-4 min-h-[80vh]">
-    <div class="flex justify-end mb-4">
-        <a asp-action="Create" class="text-ColorBlack px-4 py-2 rounded-md shadow hover:bg-Secondary transition hover\:text-ColorWhite duration-300">
-            Add New Project
-        </a>
-    </div>
 
 
-        <div class="container mx-auto p-4">
-       
 
-            @foreach (var project in Model)
-          
+@if (User.Identity.IsAuthenticated){
+    <div class="container mx-auto min-h-[80vh] px-4">
+        @if (User.IsInRole("Freelancer"))
         {
+        <div class="sticky right-[0.2rem] top-[0.5rem] mb-4 flex justify-end">
           
-                <div class="bg-ColorWhite border-ColorBlack shadow-lg my-[1rem] rounded-lg p-4 mb-4">
-                    <h2 class="text-xl uppercase font-semibold">@Html.DisplayFor(modelItem => project.Title)</h2>
-                    <p class=" mb-2">@Html.DisplayFor(modelItem => project.Description)</p>
-                    <p class="">Start Date: @Html.DisplayFor(modelItem => project.StartDate)</p>
-                <p class="text-lg font-semibold capitalize">
-                    @project.Client?.FirstName @project.Client?.LastName
-                    </p>
-                <p class="mt-2 font-bold">Urgency:
-                    @if (project.Urgency == 1)
-                    {
-                        <span class="text-[red] ">High</span> 
-                    }
-                    else if (project.Urgency == 2)
-                    {
-                        <span class="text-[blue] ">Medium</span> 
-                    }
-                    else if (project.Urgency == 3)
-                    {
-                        <span class="text-[yellow] ">Low</span> 
-                    }
-               
-                </p>
-                    <div class="mt-4">
-                    <a asp-action="Edit" asp-route-id="@project.ProjectId" class="bg-[green] border-2 border-ColorBlack text-ColorWhite p-2 text-sm hover:bg-ColorBlack hover:border-[green] rounded-[5px] uppercase shadow-sm">Edit</a>
+            <a asp-action="Create" class="border-2 mt-4 rounded-md border-solid px-4 py-2 text-ColorBlack shadow transition duration-300 hover:bg-Secondary hover:text-ColorWhite">
+                Add New Project
+            </a>
+        </div>
+            }
 
+
+            <div class="container mx-auto p-4">
+
+
+            @foreach (var project in SortedProjects)
+         
+
+            {
+         
+                <div class="my-[1rem] mb-4 rounded-lg border-ColorBlack bg-ColorWhite bg-[aliceblue] p-4 shadow-lg"
+            
+                >
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-semibold uppercase">@Html.DisplayFor(modelItem => project.Title)</h2>
+                        <p class="font-semibold text-Secondary">#@Html.DisplayFor(modelItem => project.ProjectId)</p>
+                    </div>
+
+
+                        <p class="mb-2">@Html.DisplayFor(modelItem => project.Description)</p>
+                        <p class="">Start Date: @Html.DisplayFor(modelItem => project.StartDate)</p>
+                    <p class="text-lg font-semibold capitalize">
+                        @project.Client?.FirstName @project.Client?.LastName
+                        </p>
+                    <p class="mt-2 font-bold">Urgency:
+                        @if (project.Urgency == 1)
+                        {
+                            <span class="text-[red]">High</span> 
+                        }
+                        else if (project.Urgency == 2)
+                        {
+                            <span class="text-[blue]">Medium</span> 
+                        }
+                        else if (project.Urgency == 3)
+                        {
+                            <span class="text-[yellow]">Low</span> 
+                        }
+               
+                    </p>
+                    <p class="mt-2 font-bold">Project Status:
+                        @if (project.Status == 1)
+                        {
+                            <span class="text-[blue]">Active</span>
+                        }
+                        else if (project.Status == 2)
+                        {
+                            <span class="text-[green]">Hold</span>
+                        }
+                        else if (project.Status == 3)
+                        {
+                            <span class="text-[grey]">Completed</span>
+                        }
+                    </p>
+
+                    <div class="mt-4 flex justify-between">
+                        <div class="flex gap-x-4">
+
+                            @if (User.IsInRole("Freelancer"))
+                            {
+                                <a asp-action="Edit" asp-route-id="@project.ProjectId" class="border-2 rounded-[5px] border-ColorBlack bg-[green] p-2 uppercase text-ColorWhite shadow-sm">Edit</a>
+
+                            }
+                                <a asp-action="Details" asp-route-id="@project.ProjectId" class="border-2 rounded-[5px] bg-[blue] p-2 uppercase text-ColorWhite shadow-sm">Details</a>
+                        </div>
+
+                        @if (User.IsInRole("Freelancer"))
+                        {
+                            
+                     
                         <form asp-action="Delete" asp-route-id="@project.ProjectId" method="post" class="inline">
                             <input type="hidden" name="_method" value="DELETE" />
-                        <button type="submit" class="bg-[red] border-2 border-ColorBlack text-ColorWhite p-2 text-sm hover:bg-ColorBlack hover:border-[red] rounded-[5px] uppercase shadow-sm">Delete</button>
-                        </form>
+                            <button type="submit" class="border-2 rounded-[5px] border-ColorBlack bg-[red] p-2 uppercase text-ColorWhite shadow-sm">Delete</button>
+                            </form>
+                        }
                     </div>
-                </div>
-            }
-        </div>
+                    </div>
+                }
+            </div>
     
-</div>
+    </div>
+}

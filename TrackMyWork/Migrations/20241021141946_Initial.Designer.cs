@@ -12,8 +12,8 @@ using TrackMyWork.Data;
 namespace TrackMyWork.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241007125958_UpdatedProjectModel")]
-    partial class UpdatedProjectModel
+    [Migration("20241021141946_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -508,7 +508,6 @@ namespace TrackMyWork.Migrations
                     b.HasOne("TrackMyWork.Models.Client", "Client")
                         .WithMany("Projects")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Client");

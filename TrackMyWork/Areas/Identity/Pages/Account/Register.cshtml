@@ -1,0 +1,83 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="border-b-2 relative flex h-[25rem] w-full items-center justify-center border-solid bg-Primary bg-cover bg-no-repeat" style="background: rgb(252,158,255);
+background: linear-gradient(200deg, rgba(252,158,255,1) 1%, rgba(213,213,213,1) 61%, rgba(144,230,255,1) 100%);">
+    <p class="relative mb-6 text-center text-5xl font-bold uppercase tracking-widest text-Primary" style="-webkit-text-stroke:1px black;">
+        @ViewData["Title"]
+    </p>
+</div>
+
+
+
+<div class="mx-auto mt-6 w-[35rem]">
+    <div class="">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="space-y-4 rounded-xl bg-Secondary p-6 shadow-xl">
+            <h2 class="mb-4 text-xl font-medium">Create a new account.</h2>
+            <hr class="mb-4" />
+            <div asp-validation-summary="ModelOnly" class="text-red-600" role="alert"></div>
+
+            <!-- Email Input -->
+            <div class="mb-4">
+                <label asp-for="Input.Email" class="text-gray-700 block text-sm font-medium">Email</label>
+                <input asp-for="Input.Email" class="border-gray-300 mt-1 block w-full rounded-md border px-3 py-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" autocomplete="username" aria-required="true" placeholder="yourname@yourname.com" />
+                <span asp-validation-for="Input.Email" class="text-red-600"></span>
+            </div>
+
+            <!-- Password Input -->
+            <div class="mb-4">
+                <label asp-for="Input.Password" class="text-gray-700 block text-sm font-medium">Password</label>
+                <input asp-for="Input.Password" class="border-gray-300 mt-1 block w-full rounded-md border px-3 py-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <span asp-validation-for="Input.Password" class="text-red-600"></span>
+            </div>
+
+            <!-- Confirm Password Input -->
+            <div class="mb-4">
+                <label asp-for="Input.ConfirmPassword" class="text-gray-700 block text-sm font-medium">Confirm Password</label>
+                <input asp-for="Input.ConfirmPassword" class="border-gray-300 mt-1 block w-full rounded-md border px-3 py-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-red-600"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+                <button id="registerSubmit" type="submit" class="border-2 rounded-[5px] border-ColorWhite bg-Secondary px-6 py-2 text-ColorWhite shadow-lg transition duration-300 hover:bg-ColorWhite hover:text-Secondary hover:border-Secondary" >Register</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div>
+        <section>
+            <h3 class="mb-4 text-xl font-medium">Use another service to register.</h3>
+            <hr class="mb-4" />
+            @if ((Model.ExternalLogins?.Count ?? 0) == 0)
+            {
+                <div>
+                    <p>
+                        There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715" class="text-indigo-600 hover:underline">article about setting up this ASP.NET application to support logging in via external services</a>.
+                    </p>
+                </div>
+            }
+            else
+            {
+                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="space-y-4">
+                    <div>
+                        <p>
+                            @foreach (var provider in Model.ExternalLogins!)
+                            {
+                                <button type="submit" class="bg-gray-800 text-white w-full rounded-md px-4 py-2 hover:bg-gray-900" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                            }
+                        </p>
+                    </div>
+                </form>
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

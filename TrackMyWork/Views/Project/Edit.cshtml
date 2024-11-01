@@ -4,24 +4,32 @@
     ViewData["Title"] = "Edit Project";
 }
 
-<h2 class="text-2xl font-extrabold text-center my-4">Edit Project</h2>
-<div class="h-[80vh]">
-    <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md border-primary border-2 ">
-        <form asp-action="Create" asp-controller="Project" method="post" enctype="multipart/form-data">
-            @Html.AntiForgeryToken()
+
+<div class="m-6 flex justify-end">
+    <a href="@Url.Action("Index")"
+       class="border-2 cursor-pointer rounded-md border-solid bg-Secondary px-6 py-3 text-sm font-semibold text-ColorWhite shadow-md transition duration-300 hover:bg-ColorWhite hover:text-Secondary">
+        Back to Projects
+    </a>
+</div>
+
+ 
+        <form asp-action="Edit" asp-controller="Project" method="post" enctype="multipart/form-data" class="bg-white border-primary border-2 mx-auto my-[2rem] max-w-lg rounded-lg p-6 shadow-md">
+    @Html.AntiForgeryToken()
+        <p class="text-primary border-b-2 mb-4 border-solid border-[grey] pb-2 text-xl font-bold capitalize">   @ViewData["Title"]</p>
+        
             <div class="mb-4">
-                <label asp-for="Title" class="block text-sm font-medium "></label>
-                <input asp-for="Title" class="mt-1 block w-full border rounded-md p-2" required />
+                <label asp-for="Title" class="block text-sm font-medium"></label>
+            <input asp-for="Title" class="mt-1 block w-full rounded-md border border-Secondary p-2 focus:outline-none" required />
             </div>
 
             <div class="mb-4">
-                <label asp-for="Description" class="block text-sm font-medium "></label>
-                <textarea asp-for="Description" class="mt-1 block w-full border  rounded-md p-2" required></textarea>
+                <label asp-for="Description" class="block text-sm font-medium"></label>
+            <textarea asp-for="Description" class="mt-1 block w-full rounded-md border border-Secondary p-2 focus:outline-none" required></textarea>
             </div>
 
             <div class="mb-4">
-                <label asp-for="ClientId" class="block text-sm font-medium text-gray-700"></label>
-                <select asp-for="ClientId" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                <label asp-for="ClientId" class="text-gray-700 block text-sm font-medium"></label>
+            <select asp-for="ClientId" class="border-gray-300 mt-1 block w-full rounded-md border border-Secondary p-2 focus:outline-none" required>
                     <option value="">Select Client</option>
                     @foreach (var client in ViewBag.Clients)
                     {
@@ -31,34 +39,45 @@
             </div>
 
             <div class="mb-4">
-                <label asp-for="StartDate" class="block text-sm font-medium "></label>
-                <input asp-for="StartDate" type="date" class="mt-1 block w-full  rounded-md p-2" required />
-                <span asp-validation-for="StartDate" class="text-[red] text-sm"></span>
+                <label asp-for="StartDate" class="block text-sm font-medium"></label>
+            <input asp-for="StartDate" type="date" class="border-2 mt-1 block w-full rounded-md border-Secondary p-2 shadow-sm focus:outline-none" required />
+                <span asp-validation-for="StartDate" class="text-sm text-[red]"></span>
             </div>
 
             <div class="mb-4">
-                <label asp-for="DaysToComplete" class="block text-sm font-medium "></label>
-                <input asp-for="DaysToComplete" type="number" class="mt-1 block w-full  rounded-md p-2" placeholder="Choose 1-60" required />
+                <label asp-for="DeadlineDate" class="block text-sm font-medium"></label>
+                <input asp-for="DeadlineDate" type="date" class="border-2 mt-1 block w-full rounded-md border-Secondary p-2 shadow-sm focus:outline-none"  required />
+                <span asp-validation-for="DeadlineDate" class="text-sm text-[red]"></span>
             </div>
 
             <div class="mb-4">
                 <label asp-for="Urgency" class="block text-sm font-medium"></label>
-                <select asp-for="Urgency" class="mt-1 block w-full border  rounded-md p-2" required>
+            <select asp-for="Urgency" class="mt-1 block w-full rounded-md border border-Secondary p-2 focus:outline-none" required>
                     <option value="">Select Urgency</option>
                     <option value="1">High</option>
                     <option value="2">Medium</option>
                     <option value="3">Low</option>
                 </select>
             </div>
+            <div class="mb-4">
+                <label asp-for="Status" class="block text-sm font-medium"></label>
+                <select asp-for="Status" class="border-2 mt-1 block w-full rounded-md border-Secondary p-2 shadow-sm focus:outline-none" required>
+                    <option value="">Select Status</option>
+                    <option value="1">Active</option>
+                    <option value="2">Hold</option>
+                    <option value="3">Complete</option>
+                </select>
+                <span asp-validation-for="Urgency" class="text-sm text-[red]"></span>
+            </div>
 
             <div class="flex justify-between">
-                <a asp-action="Index" class="font-bold border-2 rounded-[5px] py-2 cursor-pointer px-6 bg-[red]">Cancel</a>
-                <input type="submit" value="Update" class=" bg-Secondary font-bold border-2 rounded-[5px] py-2 cursor-pointer px-6">
+                <a asp-action="Index" class="border-2 cursor-pointer rounded-[5px] bg-[red] px-6 py-2 font-bold">Cancel</a>
+                <input type="submit" value="Update" class="border-2 cursor-pointer rounded-[5px] bg-Secondary px-6 py-2 font-bold">
              
             </div>
         </form>
-    </div>
-</div>
+
+
 
 @section Scripts {
     @{

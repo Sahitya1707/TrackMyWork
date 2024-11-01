@@ -5,8 +5,10 @@
 const hamBurger = document.getElementById('hamBurger');
 const navMenu = document.getElementById('navMenu');
 const closeNav = document.getElementById('closeNav');
-const overlay = document.getElementById('overlay')
-const body = document.querySelector('body')
+const overlay = document.getElementById('overlay');
+const body = document.querySelector('body');
+const accordian = document.querySelector('#accordian');
+const accordianPanel = document.querySelector("#panel");
 
 
 hamBurger.addEventListener('click', () => {
@@ -25,3 +27,8 @@ const closeMenu = () => {
 
 closeNav.addEventListener('click', closeMenu);
 overlay.addEventListener('click', closeMenu)
+accordian.addEventListener(
+    "click", () => {
+        panel.classList.toggle('display-hidden')
+    }
+)

@@ -12,15 +12,15 @@ using TrackMyWork.Data;
 namespace TrackMyWork.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241007023930_UpdateInvoiceRelationships")]
-    partial class UpdateInvoiceRelationships
+    [Migration("20241026010431_added_message_model")]
+    partial class added_message_model
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -33,33 +33,27 @@ namespace TrackMyWork.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageId"));
 
-                    b.Property<string>("ClientId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ClientId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProjectId")
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SenderId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("SentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("MessageId");
-
-                    b.HasIndex("ClientId1");
 
                     b.HasIndex("ProjectId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("SenderId");
 
                     b.ToTable("Messages");
                 });
@@ -333,14 +327,26 @@ namespace TrackMyWork.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DeadlineDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("Urgency")
+                        .HasColumnType("int");
 
                     b.HasKey("ProjectId");
 
@@ -407,23 +413,21 @@ namespace TrackMyWork.Migrations
 
             modelBuilder.Entity("Message", b =>
                 {
-                    b.HasOne("TrackMyWork.Models.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId1");
-
-                    b.HasOne("TrackMyWork.Models.Project", null)
-                        .WithMany("Message")
-                        .HasForeignKey("ProjectId");
-
-                    b.HasOne("TrackMyWork.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                    b.HasOne("TrackMyWork.Models.Project", "Project")
+                        .WithMany("Messages")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Client");
+                    b.HasOne("TrackMyWork.Models.User", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Project");
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -499,7 +503,6 @@ namespace TrackMyWork.Migrations
                     b.HasOne("TrackMyWork.Models.Client", "Client")
                         .WithMany("Projects")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Client");
@@ -535,7 +538,7 @@ namespace TrackMyWork.Migrations
                 {
                     b.Navigation("Invoices");
 
-                    b.Navigation("Message");
+                    b.Navigation("Messages");
 
                     b.Navigation("TimeEntries");
                 });

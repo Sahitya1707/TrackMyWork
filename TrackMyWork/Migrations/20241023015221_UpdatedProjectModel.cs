@@ -11,42 +11,30 @@ namespace TrackMyWork.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
+            migrationBuilder.RenameColumn(
                 name: "DaysToComplete",
                 table: "Projects",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
+                newName: "Status");
 
             migrationBuilder.AddColumn<DateTime>(
-                name: "StartDate",
+                name: "DeadlineDate",
                 table: "Projects",
                 type: "datetime2",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
-
-            migrationBuilder.AddColumn<int>(
-                name: "Urgency",
-                table: "Projects",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "DaysToComplete",
+                name: "DeadlineDate",
                 table: "Projects");
 
-            migrationBuilder.DropColumn(
-                name: "StartDate",
-                table: "Projects");
-
-            migrationBuilder.DropColumn(
-                name: "Urgency",
-                table: "Projects");
+            migrationBuilder.RenameColumn(
+                name: "Status",
+                table: "Projects",
+                newName: "DaysToComplete");
         }
     }
 }

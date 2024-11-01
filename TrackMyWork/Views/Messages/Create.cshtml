@@ -1,0 +1,43 @@
+﻿@model Message
+
+@{
+    ViewData["Title"] = "Send Message";
+}
+
+
+
+<div class="flex flex-wrap justify-center">
+    <div class="w-full p-4 md:w-1/3">
+        <form asp-action="Create" class="bg-primary text-colorWhite rounded-lg p-6 shadow-lg" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="mb-4 text-[red]"></div>
+            <div class="mb-4">
+                <label asp-for="Content" class="mb-2 block text-sm font-semibold"></label>
+                <textarea asp-for="Content" class="form-control border-secondary block w-full rounded border p-2"></textarea>
+                <span asp-validation-for="Content" class="text-sm text-[red]"></span>
+            </div>
+            <div class="mb-4">
+                <label asp-for="ProjectId" class="mb-2 block text-sm font-semibold"></label>
+                <select asp-for="ProjectId" class="form-control border-secondary block w-full rounded border p-2" asp-items="ViewBag.ProjectId"></select>
+                <span asp-validation-for="ProjectId" class="text-sm text-[red]"></span>
+            </div>
+            <div class="mb-4">
+                <label asp-for="SenderMail" class="mb-2 block text-sm font-semibold"></label>
+                <p class="text-colorBlack">@ViewData["SenderEmail"]</p>
+                <input type="hidden" asp-for="SenderMail" value="@ViewData["SenderEmail"]"/>
+                <span asp-validation-for="SenderMail" class="text-sm text-[red]"></span>
+            </div>
+            <div class="mb-4">
+                <input type="submit" value="Send Message" class="border-2 cursor-pointer rounded-md border-solid bg-Secondary px-6 py-3 text-sm font-semibold text-ColorWhite shadow-md transition duration-300 hover:bg-ColorWhite hover:text-Secondary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div class="mr-[2rem] mt-4 flex justify-end">
+    <a asp-action="Index" class="border-2 cursor-pointer rounded-md border-solid bg-Primary px-6 py-3 text-sm font-semibold text-ColorBlack shadow-md transition duration-300 hover:bg-ColorBlack hover:text-Primary">Back to List</a>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
