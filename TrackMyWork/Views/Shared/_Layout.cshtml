@@ -53,22 +53,32 @@
                     <!--Showing the below item only after it is authenticated-->
                     @if (User.Identity.IsAuthenticated)
                     {
-
-                        <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
-                            <a asp-action="index" asp-controller="client">Clients</a>
-                        </li>
+                
                         <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
                             <a asp-action="index" asp-controller="project">My Projects</a>
                         </li>
                         <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
-                            <a href="/TimeTracking">Time Tracking</a>
+                            <a uiactions="index" asp-controller="messages">Messages</a>
                         </li>
-                        <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
-                            <a href="/Invoices">Invoices</a>
-                        </li>
-                       
-                       
-                       }
+                        @if (User.IsInRole("Freelancer"))
+                        {
+                            <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
+                                <a asp-action="index" asp-controller="client">Clients</a>
+                            </li>
+                            <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
+                                <a uiactions="index" asp-controller="messages">Messages</a>
+                            </li>
+                            <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
+                                <a href="/TimeTracking">Time Tracking</a>
+                            </li>
+                            <li class="border-b-2 durtion-50 my-[20px] w-[100%] border-solid border-Primary p-2 ease-in hover:bg-Secondary hover:bg-opacity-30">
+                                <a href="/Invoices">Invoices</a>
+                            </li>
+                        }
+
+
+
+                    }
                    
                     <partial name="_LoginPartial" class="border-b-2 border-solid p-2" />
                 </ul>

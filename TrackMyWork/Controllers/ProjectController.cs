@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using TrackMyWork.Data;
 using TrackMyWork.Models;
 namespace TrackMyWork.Controllers
 {
+    [Authorize]
     public class ProjectController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -24,6 +26,8 @@ namespace TrackMyWork.Controllers
 
             return View(projects);
         }
+
+        [Authorize(Roles = "Freelancer")]
         public async Task<IActionResult> Create() {
             /** view bag is just a general way to send data from controller to view, I need the client data so I did this https://stackify.com/viewbag/#:~:text=In%20general%2C%20ViewBag%20is%20a,was%20introduced%20in%20MVC%201.0).
              */
@@ -52,6 +56,8 @@ namespace TrackMyWork.Controllers
           
             return View(project);
         }
+
+        [Authorize(Roles = "Freelancer")]
         public async Task<IActionResult> Edit(int id)
         {
             var project = await _context.Projects.FindAsync(id);
@@ -87,7 +93,9 @@ namespace TrackMyWork.Controllers
 
             return View(project);
         }
-// Delete function
+
+        // Delete function
+        [Authorize(Roles = "Freelancer")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int? id)
@@ -162,12 +170,8 @@ namespace TrackMyWork.Controllers
                 if (ModelState.IsValid)
                 {
                     Console.WriteLine("I am inside of model valid state");
-                    Console.WriteLine(message.MessageId);
-                    Console.WriteLine(message.SenderMail);
-                    Console.WriteLine(message.SentDate);
-                    Console.WriteLine(message.Content);
-                    Console.WriteLine(message.ProjectId);
-                    Console.WriteLine("I am not outside");
+                    
+                 
                     message.SentDate = DateTime.Now;
                     message.SenderMail = User.Identity?.Name; // as the Sendermail is static so getting is directly through user.identity
                     _context.Add(message);

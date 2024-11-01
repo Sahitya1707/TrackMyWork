@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ using TrackMyWork.Models;
 
 namespace TrackMyWork.Controllers
 {
+    [Authorize]
+    [Authorize(Roles = "Freelancer")]
     public class ClientController : Controller
 
 
