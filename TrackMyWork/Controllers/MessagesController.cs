@@ -73,11 +73,29 @@ namespace TrackMyWork.Controllers
         }
 
         // GET: Messages/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["ProjectId"] = new SelectList(_context.Projects, "ProjectId", "Title");
-            ViewData["SenderEmail"] = User.Identity?.Name;
-        
+            // this whill reaturn the current client  ( my approach for filter the send message. I mean client should be only able to send message their own project not on other's project)
+
+            var currentClient = await _context.Clients
+        .FirstOrDefaultAsync(c => c.Email == User.Identity.Name);
+
+         
+            // targeting all the project
+            var projectsForClient = await _context.Projects.ToListAsync();
+            if (User.IsInRole("Client"))
+            {
+                // if user role is client, let's filter the project
+                 projectsForClient = await _context.Projects
+               .Where(p => p.ClientId == currentClient.ClientId) 
+               .ToListAsync();
+            }
+               
+
+            // targeting project id
+            ViewData["ProjectId"] = new SelectList(projectsForClient, "ProjectId", "Title");
+            ViewData["SenderEmail"] = User.Identity?.Name; // Capture the sender's email
+
             return View();
         }
 
@@ -88,32 +106,28 @@ namespace TrackMyWork.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MessageId,Content,ProjectId,SenderMail,IsRead, SentDate")] Message message)
         {
-            Console.WriteLine("I am outise");
-// see the error 
-            if (!ModelState.IsValid)
-            {
-                foreach (var modelState in ModelState.Values)
-                {
-                    foreach (var error in modelState.Errors)
-                    {
-                        Console.WriteLine(error.ErrorMessage);
-                    }
-                }
-            }
-            Console.WriteLine(User.Identity?.Name);
+            // Retrieve the current client to get the ClientId
+            var currentClient = await _context.Clients
+                .FirstOrDefaultAsync(c => c.Email == User.Identity.Name);
+
+           
 
             if (ModelState.IsValid)
             {
-               Console.WriteLine("I am not outise");
-                message.SentDate = DateTime.Now;
-                message.SenderMail = User.Identity?.Name; // as the Sendermail is static so getting is directly through user.identity
+                message.SentDate = DateTime.Now; 
+                message.SenderMail = User.Identity?.Name; 
+              
+
                 _context.Add(message);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                await _context.SaveChangesAsync(); 
+                return RedirectToAction(nameof(Index)); // Redirect to the index action
             }
-            ViewData["ProjectId"] = new SelectList(_context.Projects, "ProjectId", "Title", message.ProjectId);
-        
-            return View(message);
+
+           
+            ViewData["ProjectId"] = new SelectList(_context.Projects.Where(p => p.ClientId == currentClient.ClientId), "ProjectId", "Title", message.ProjectId);
+
+            return View(message); 
+
         }
 
         private bool MessageExists(int id)

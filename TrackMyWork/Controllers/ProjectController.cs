@@ -40,9 +40,10 @@ namespace TrackMyWork.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Title, Description, ClientId, StartDate, Urgency, DeadlineDate, Status")]Project project)
         {
-       
+           
+            // Assuming you have an Email property in your Client model
 
-                if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
     
 

@@ -42,7 +42,13 @@ namespace TrackMyWork.Data
                .HasOne(p => p.Client)
                .WithMany(c => c.Projects)
                .HasForeignKey(p => p.ClientId)
-               .OnDelete(DeleteBehavior.ClientSetNull);
+               .OnDelete(DeleteBehavior.ClientSetNull); 
+            
+            
+            //Builder.Entity<Message>()
+            //.HasOne(m => m.Client)
+            //.WithMany() // Assuming a client can have many messages
+            //.HasForeignKey(m => m.ClientId);
         }
        
     }
