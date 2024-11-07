@@ -25,8 +25,10 @@ public class Message
     
     public String SenderMail { get; set; } // this is to get/show the user email in messaging system.
 
-    // Status to check if the message has been read
-    public bool IsRead { get; set; } = false;
+  // my approach for filter the send message. I mean client should be only able to send message their own project not on other's project
+
+    //public int ClientId { get; set; }
+    //public Client? Client { get; set; }
 
 
 

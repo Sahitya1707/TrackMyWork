@@ -73,11 +73,29 @@ namespace TrackMyWork.Controllers
         }
 
         // GET: Messages/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["ProjectId"] = new SelectList(_context.Projects, "ProjectId", "Title");
-            ViewData["SenderEmail"] = User.Identity?.Name;
-        
+            // this whill reaturn the current client  ( my approach for filter the send message. I mean client should be only able to send message their own project not on other's project)
+
+            var currentClient = await _context.Clients
+        .FirstOrDefaultAsync(c => c.Email == User.Identity.Name);
+
+         
+            // targeting all the project
+            var projectsForClient = await _context.Projects.ToListAsync();
+            if (User.IsInRole("Client"))
+            {
+                // if user role is client, let's filter the project
+                 projectsForClient = await _context.Projects
+               .Where(p => p.ClientId == currentClient.ClientId) 
+               .ToListAsync();
+            }
+               
+
+            // targeting project id
+            ViewData["ProjectId"] = new SelectList(projectsForClient, "ProjectId", "Title");
+            ViewData["SenderEmail"] = User.Identity?.Name; // Capture the sender's email
+
             return View();
         }
 
@@ -88,123 +106,29 @@ namespace TrackMyWork.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MessageId,Content,ProjectId,SenderMail,IsRead, SentDate")] Message message)
         {
-            Console.WriteLine("I am outise");
-// see the error 
-            if (!ModelState.IsValid)
-            {
-                foreach (var modelState in ModelState.Values)
-                {
-                    foreach (var error in modelState.Errors)
-                    {
-                        Console.WriteLine(error.ErrorMessage);
-                    }
-                }
-            }
-            Console.WriteLine(User.Identity?.Name);
+            // Retrieve the current client to get the ClientId
+            var currentClient = await _context.Clients
+                .FirstOrDefaultAsync(c => c.Email == User.Identity.Name);
+
+           
 
             if (ModelState.IsValid)
             {
-               Console.WriteLine("I am not outise");
-                message.SentDate = DateTime.Now;
-                message.SenderMail = User.Identity?.Name; // as the Sendermail is static so getting is directly through user.identity
+                message.SentDate = DateTime.Now; 
+                message.SenderMail = User.Identity?.Name; 
+              
+
                 _context.Add(message);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                await _context.SaveChangesAsync(); 
+                return RedirectToAction(nameof(Index)); // Redirect to the index action
             }
-            ViewData["ProjectId"] = new SelectList(_context.Projects, "ProjectId", "Title", message.ProjectId);
-        
-            return View(message);
+
+           
+            ViewData["ProjectId"] = new SelectList(_context.Projects.Where(p => p.ClientId == currentClient.ClientId), "ProjectId", "Title", message.ProjectId);
+
+            return View(message); 
+
         }
-
-        // GET: Messages/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var message = await _context.Messages.FindAsync(id);
-        //    if (message == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    ViewData["ProjectId"] = new SelectList(_context.Projects, "ProjectId", "Description", message.ProjectId);
-        //    //ViewData["SenderId"] = new SelectList(_context.Set<User>(), "UserId", "Email", message.SenderId);
-        //    return View(message);
-        //}
-
-        //// POST: Messages/Edit/5
-        //// To protect from overposting attacks, enable the specific properties you want to bind to.
-        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("MessageId,Content,SentDate,ProjectId,SenderId,IsRead")] Message message)
-        //{
-        //    if (id != message.MessageId)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(message);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!MessageExists(message.MessageId))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["ProjectId"] = new SelectList(_context.Projects, "ProjectId", "Description", message.ProjectId);
-        //    //ViewData["SenderId"] = new SelectList(_context.Set<User>(), "UserId", "Email", message.SenderId);
-        //    return View(message);
-        //}
-
-        // GET: Messages/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var message = await _context.Messages
-        //        .Include(m => m.Project)
-        //        //.Include(m => m.Sender)
-        //        .FirstOrDefaultAsync(m => m.MessageId == id);
-        //    if (message == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(message);
-        //}
-
-        // POST: Messages/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var message = await _context.Messages.FindAsync(id);
-        //    if (message != null)
-        //    {
-        //        _context.Messages.Remove(message);
-        //    }
-
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
 
         private bool MessageExists(int id)
         {

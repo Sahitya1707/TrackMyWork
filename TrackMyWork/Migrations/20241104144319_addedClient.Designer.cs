@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrackMyWork.Data;
 
@@ -11,9 +12,11 @@ using TrackMyWork.Data;
 namespace TrackMyWork.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241104144319_addedClient")]
+    partial class addedClient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,6 +33,9 @@ namespace TrackMyWork.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageId"));
 
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -45,6 +51,8 @@ namespace TrackMyWork.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("MessageId");
+
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("ProjectId");
 
@@ -406,11 +414,19 @@ namespace TrackMyWork.Migrations
 
             modelBuilder.Entity("Message", b =>
                 {
+                    b.HasOne("TrackMyWork.Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("TrackMyWork.Models.Project", "Project")
                         .WithMany("Messages")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
 
                     b.Navigation("Project");
                 });
