@@ -5,6 +5,7 @@ using TrackMyWork.Controllers;
 using TrackMyWork.Data;
 using TrackMyWork.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TrackMyWorkTesting
 {
@@ -32,9 +33,49 @@ namespace TrackMyWorkTesting
             _context.SaveChanges();
 
         }
+        #region "Index"
+        [TestMethod]
+        public void IndexReturnsView()
+        {
+            // arrange not needed => runs first in TestInitialize()
+
+            // act
+            var result = (ViewResult)controller.Index().Result;
+
+            // assert
+            Assert.AreEqual("Index", result.ViewName);
+        }
+        #endregion
+
+        #region "Create"
+        [TestMethod]
+        public void CreateModelValidReturnsIndex()
+        {
+            //// arrange (not needed)
+            //var client = _context.Clients.FirstOrDefault(c => c.ClientId == 102);
+
+            ////act
+            //var result = (ViewResult)controller.Index().Result;
 
 
-            [TestMethod]
+            //// assert
+            //Assert.AreEqual("Index", result.ViewName);
+        }
+     
+       
+
+        #endregion
+
+        #region "Client"
+
+        #endregion
+
+        #region "Delete"
+
+
+        #endregion
+
+        [TestMethod]
         public void TestMethod1()
         {
         }
