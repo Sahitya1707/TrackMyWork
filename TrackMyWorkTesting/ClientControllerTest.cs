@@ -6,6 +6,7 @@ using TrackMyWork.Data;
 using TrackMyWork.Models;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.ContentModel;
 
 namespace TrackMyWorkTesting
 {
@@ -28,45 +29,126 @@ namespace TrackMyWorkTesting
                 .Options;
             _context = new ApplicationDbContext(options);
             // populate client into mock db
-            _context.Clients.Add(new Client { ClientId = 102,Email="rich@test.ca", FirstName = "Richard", LastName="Freeman" });
-            _context.Clients.Add(new Client { ClientId = 12, Email = "sahitya@test.ca", FirstName = "Sahitya", LastName = "Neupane" });
+            _context.Clients.Add(new Client { ClientId = 105,Email="rich@test.ca", FirstName = "Richard", LastName="Freeman" });
+            _context.Clients.Add(new Client { ClientId = 1222, Email = "sahitya@test.ca", FirstName = "Sahitya", LastName = "Neupane" });
+            _context.Clients.Add(new Client { ClientId = 2, Email = "sahitya@et.ca", FirstName = "itya", LastName = "Neue" });
             _context.SaveChanges();
+
+            // create controller and pass it mock db
+            controller = new ClientController(_context);
 
         }
         #region "Index"
         [TestMethod]
-        public void IndexReturnsView()
+        public async Task IndexReturnsView()
         {
-            // arrange not needed => runs first in TestInitialize()
-
-            // act
+            // Act
             var result = (ViewResult)controller.Index().Result;
 
-            // assert
+
+            // Assert
+           
             Assert.AreEqual("Index", result.ViewName);
         }
+
+        [TestMethod]
+        public void IndexReturnsModel()
+        {
+            // Act
+            var result = (ViewResult)controller.Index().Result;
+            var model = (List<Client>)result.Model;
+
+            // Assert
+            CollectionAssert.AreEqual(_context.Clients.ToList(), model);
+        }
+
         #endregion
 
         #region "Create"
         [TestMethod]
-        public void CreateModelValidReturnsIndex()
+        public async Task CreateReturnsView()
         {
-            //// arrange (not needed)
-            //var client = _context.Clients.FirstOrDefault(c => c.ClientId == 102);
+            //arrange
+           
 
-            ////act
-            //var result = (ViewResult)controller.Index().Result;
+            //act
+            var result = (ViewResult)controller.Create();
+            //assert
 
-
-            //// assert
-            //Assert.AreEqual("Index", result.ViewName);
+            Assert.AreEqual("Create", result.ViewName);
         }
-     
-       
+        // create post
+        [TestMethod]
+        public async Task CreateModelValidReturnsIndex()
+        {
+            // arrange 
+            var newClient = new Client
+            {
+                ClientId = 9999,  // Unique ClientId that doesn't exist in the in-memory database same id wouldnot give us to post
+                FirstName = "Sahtiya",
+                LastName = "Don",
+                Email = "test2@test.com"
+            };
+           
 
+            //act
+            var result = await controller.Create(newClient) as RedirectToActionResult;
+
+
+            // assert
+            Assert.AreEqual("Index", result?.ActionName);
+        }
+
+        [TestMethod]
+
+     public async Task CreateInvalidModelReturnsClientView()
+        {
+            // Create a new client with missing required fields or invalid data
+            var invalidClient = new Client
+            {
+                ClientId = 999,  // Unique ClientId that doesn't exist in the in-memory database
+                FirstName = "",   // Invalid: Empty First Name
+                LastName = "Doe",
+                Email = "invalid-email"  // Invalid Email format
+            };
+
+
+            controller.ModelState.AddModelError("FirstName", "First name is required");
+            controller.ModelState.AddModelError("Email", "Invalid email format");
+            // Act - Call the Create action with the invalid client model
+
+            var result = await controller.Create(invalidClient) as ViewResult;
+
+
+            Assert.AreEqual("Create", result?.ViewName);
+
+        }
+        [TestMethod]
+public async Task CreateInvalidModelReturnModel()
+        {
+            // Arrange
+            var invalidClient = new Client
+            {
+                ClientId = 999,
+                FirstName = "",
+                LastName = "Don",
+                Email = "invalid-email"
+            };
+
+            controller.ModelState.AddModelError("FirstName", "First name is required");
+            controller.ModelState.AddModelError("Email", "Invalid email format");
+
+            // Act
+            var result = await controller.Create(invalidClient) as ViewResult;
+
+            // Assert
+            Assert.AreSame(invalidClient, result?.Model);
+
+        }
         #endregion
 
-        #region "Client"
+        #region "Edit"
+        // post
 
         #endregion
 
