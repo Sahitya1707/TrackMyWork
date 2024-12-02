@@ -124,7 +124,7 @@ namespace TrackMyWorkTesting
 
         }
         [TestMethod]
-public async Task CreateInvalidModelReturnModel()
+            public async Task CreateInvalidModelReturnModel()
         {
             // Arrange
             var invalidClient = new Client
@@ -153,13 +153,45 @@ public async Task CreateInvalidModelReturnModel()
         #endregion
 
         #region "Delete"
+        [TestMethod]
+        public void DeleteClientIdNullReturnNotFound()
+        {
+            //arrange
+            
+            //act
+            var result = (ViewResult)controller.Delete(null).Result;
 
+
+            // assert
+            Assert.AreEqual("404", result.ViewName);
+        }
+        [TestMethod]
+        public void DeleteClientNotFoundReturnNotFound()
+        {
+            // arrange
+
+            // act
+            var result = (ViewResult)controller.Delete(9999).Result;
+
+            // assert
+            Assert.AreEqual("404", result.ViewName);
+
+        }
+
+        [TestMethod]
+        public void DeleteSuccessReturnIndex()
+        {
+            // arrange
+
+            // Act
+            var result = controller.Delete(105).Result as RedirectToActionResult;
+
+            // Assert -- is it successfull?
+            Assert.AreEqual("Index", result?.ActionName);
+        }
 
         #endregion
 
-        [TestMethod]
-        public void TestMethod1()
-        {
-        }
+
     }
 }

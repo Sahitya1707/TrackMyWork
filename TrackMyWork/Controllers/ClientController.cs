@@ -111,13 +111,13 @@ namespace TrackMyWork.Controllers
             Console.WriteLine("We are inside here.");
             if (id == null)
             {
-                return NotFound();
+                return View("404");
             }
 
             var client = await _context.Clients.FindAsync(id);
             if (client == null)
             {
-                return NotFound();
+                return View("404");
             }
             else
             {
