@@ -26,11 +26,11 @@ namespace TrackMyWork.Controllers
             // need to add clients or get the clients from the db in order to loop/use it in index.cshtml view
             var clients = await _context.Clients.ToListAsync();
 
-            return View(clients);
+            return View("Index",clients);
         }
         public IActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         // POST: Client/Create
@@ -61,7 +61,7 @@ namespace TrackMyWork.Controllers
 
             }
 
-            return View(client);
+            return View("Create",client);
         }
         // handling edit 
         // GET: Client/Edit/5
@@ -98,6 +98,7 @@ namespace TrackMyWork.Controllers
 
 
             }
+           
 
             return View(client);
         }
@@ -110,13 +111,13 @@ namespace TrackMyWork.Controllers
             Console.WriteLine("We are inside here.");
             if (id == null)
             {
-                return NotFound();
+                return View("404");
             }
 
             var client = await _context.Clients.FindAsync(id);
             if (client == null)
             {
-                return NotFound();
+                return View("404");
             }
             else
             {
