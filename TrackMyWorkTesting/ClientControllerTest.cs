@@ -145,6 +145,29 @@ namespace TrackMyWorkTesting
             Assert.AreSame(invalidClient, result?.Model);
 
         }
+
+        [TestMethod]
+        public async Task CreatePostAddsClientToDatabase()
+        {
+            // Arrange
+            var newClient = new Client
+            {
+                ClientId = 1234,
+                FirstName = "John",
+                LastName = "Doe",
+                Email = "john.doe@test.com"
+            };
+
+            // Act
+            await controller.Create(newClient);
+
+            // Assert
+            var addedClient = _context.Clients.Find(1234); // Check database
+            Assert.IsNotNull(addedClient); // Single assert
+        }
+
+
+
         #endregion
 
         #region "Edit"
@@ -187,9 +210,24 @@ namespace TrackMyWorkTesting
             var result = controller.Delete(105).Result as RedirectToActionResult;
 
             // Assert -- is it successfull?
-            Assert.AreEqual("Index", result?.ActionName);
+            Assert.AreEqual("Index", result.ActionName);
         }
 
+
+
+        [TestMethod]
+        public async Task DeleteConfirmedRemovesClientFromDatabase()
+        {
+            // Arrange
+            var clientIdToDelete = 105;
+
+            // Act
+            await controller.DeleteConfirmed(clientIdToDelete);
+
+            // Assert
+            var deletedClient = _context.Clients.Find(clientIdToDelete);
+            Assert.IsNull(deletedClient); // Single assert
+        }
         #endregion
 
 

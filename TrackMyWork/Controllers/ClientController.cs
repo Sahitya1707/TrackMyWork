@@ -127,5 +127,10 @@ namespace TrackMyWork.Controllers
             return RedirectToAction(nameof(Index));
 
         }
+
+        public async Task DeleteConfirmed(int clientIdToDelete)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
